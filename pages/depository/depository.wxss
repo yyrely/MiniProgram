@@ -1,0 +1,47 @@
+/* pages/location/location.wxss */
+.goods-box {
+  padding: 40px 30rpx 20px;
+  position: relative;
+  transition: all 1s ease-in;
+}
+.goods-num {
+  font-size: 16px;
+  color: #62d06f;
+  position: absolute;
+  right: 20rpx;
+  top: 10px;
+}
+.goods-num text {
+  font-weight: bold;
+}
+
+.card-box .goods-btn {
+  display: none;
+  width: 65px;
+  line-height: 1;
+  padding: 5px 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #62d06f;
+  border-radius: 5px;
+  position: absolute;
+  right: 20rpx;
+  bottom: 10px;
+}
+.card-box.show .goods-btn {
+  display: block;
+}
+
+.sku-list {
+  height: 0;
+  overflow: hidden;
+  border-top: 1px solid #eee;
+  transition: all 1s ease-out;
+}
+.card-box.show .sku-list {
+  height: auto;
+}
+.sku-inline {
+  display: inline-block;
+  margin-right: 20px;
+}
