@@ -1,0 +1,19 @@
+/**app.wxss**/
+@import "colorui/main.wxss";
+@import "colorui/icon.wxss";
+
+.hide {
+  display: none;
+}
+.main {
+  height: 100%;
+  padding: 37.5rpx 37.5rpx;
+  color: #333;
+}
+
+.card-box {
+  margin-bottom: 35rpx;
+  border: 1px solid #eee;
+  border-radius: 10rpx;
+  box-shadow: 1px 1px 5px #eee;
+}

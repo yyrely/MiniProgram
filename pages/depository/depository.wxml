@@ -1,0 +1,38 @@
+<!--pages/location/location.wxml-->
+<view class="main container">
+  <view
+    wx:for="{{list}}"
+    wx:for-item="item"
+    wx:key="productId"
+    class="card-box {{showNum == item.productId ? 'show' : '' }}"
+  >
+    <view
+      bind:tap="toggleGoods"
+      data-id="{{item.productId}}"
+      class="goods-box"
+    >
+      <view class="goods-num">货号：<text>{{item.productNo}}</text></view>
+      <view class="goods-name">货品名称：{{item.productName}}</view>
+      <view>货品描述：<text>{{item.productDesc || '暂无描述'}}</text></view>
+      <button class="goods-btn" bind:tap="editGoods">修改</button>
+    </view>
+    <view class="sku-list">
+      <view class="cu-load loading {{!loading && 'hide'}}"></view>
+      <view
+        wx:if="{{showNum === item.productId}}"
+        wx:for="{{skuList}}"
+        wx:for-item="sku"
+        wx:key="skuId"
+      >
+        <block wx:for="{{sku.valueList}}" wx:for-item="value" wx:key="valueId">
+          <text class="sku-inline sku-attribute">{{value.attributeName}}：{{value.valueName}}</text>
+        </block>
+        <view>
+          <view class="sku-inline">商品进价：<text>￥</text>{{sku.skuInPrice}}</view>
+          <view class="sku-inline">商品售价：<text>￥</text>{{sku.skuOutPrice}}</view>
+        </view>
+        <view class="sku-inline">商品库存：{{sku.skuStoke}}</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,35 @@
+<!--index.wxml-->
+<view class="main container">
+  <view class="card-box product-info">
+    <view class="product-left">
+      <image
+        bindtap="bindViewTap"
+        class="userinfo-avatar"
+        src="{{userInfo.avatarUrl}}"
+        mode="cover"
+      ></image>
+    </view>
+    <view class="product-right">
+      <text>销售额： {{userInfo.nickName}}</text>
+      <text>销 量 ：{{userInfo.nickName}}</text>
+    </view>
+  </view>
+  <view class="card-box product-info">
+    <view class="product-left">
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+    </view>
+    <view class="product-right">
+      <text>进货金额： {{userInfo.nickName}}</text>
+      <text>进货数量： {{userInfo.nickName}}</text>
+    </view>
+  </view>
+  <view class="card-box product-info">
+    <view class="product-left">
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+    </view>
+    <view class="product-right">
+      <text>库存总额： {{userInfo.nickName}}</text>
+      <text>库存总量： {{userInfo.nickName}}</text>
+    </view>
+  </view>
+</view>

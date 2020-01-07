@@ -1,0 +1,29 @@
+/**index.wxss**/
+.product-info {
+  display: flex;
+  width: 100%;
+  padding: 25rpx 30rpx;
+}
+.product-left {
+  padding-right: 30rpx;
+  margin-right: 30rpx;
+  font-size: 0;
+  border-right: 2px solid #a6e8a5;
+}
+.product-right {
+  flex: 1;
+  overflow: hidden;
+}
+.product-right text {
+  display: block;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
