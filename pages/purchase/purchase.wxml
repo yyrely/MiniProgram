@@ -1,8 +1,25 @@
-<!--logs.wxml-->
-<view class="container log-list">
-  <block wx:for="{{logs}}" wx:for-item="log">
-    <view>
-      <text>jjj</text>
+<!--pages/purchase/purchase.wxml-->
+<view class="main container">
+  <view
+    wx:for="{{purcList}}"
+    wx:for-item="info"
+    wx:key="purchaseId"
+    class="card-box sale-box"
+  >
+    <view class="">商品名称：{{info.productName}}</view>
+    <view class="">商品编号：{{info.productNo}}</view>
+    <view class="">进货数量：{{info.purchaseNums}}</view>
+    <view class="">金额总计：{{info.totalPrice}}</view>
+    <view class="">进货日期：{{info.purchaseDate}}</view>
+    <view class="">
+      规格属性：
+      <block
+        wx:for="{{info.valueList}}"
+        wx:for-item="attr"
+        wx:key="valueId"
+      >
+        <text class="product-attr">{{attr.valueName}}</text>
+      </block>
     </view>
-  </block>
+  </view>
 </view>

@@ -42,7 +42,7 @@
           <view class="sku-inline">商品进价：<text>￥</text>{{sku.skuInPrice}}</view>
           <view class="sku-inline">商品售价：<text>￥</text>{{sku.skuOutPrice}}</view>
         </view>
-        <view class="sku-inline">商品库存：{{sku.skuStoke}}</view>
+        <view class="sku-inline">商品库存：{{sku.skuStock}}</view>
       </view>
     </view>
   </view>

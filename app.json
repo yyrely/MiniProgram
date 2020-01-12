@@ -14,22 +14,32 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
+    "selectedColor": "#87daff",
+    "color": "#666",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "/images/home_icon.png",
+        "selectedIconPath": "/images/home_select.png"
       },
       {
         "pagePath": "pages/purchase/purchase",
-        "text": "进货单"
+        "text": "进货单",
+        "iconPath": "/images/purchase_icon.png",
+        "selectedIconPath": "/images/purchase_select.png"
       },
       {
         "pagePath": "pages/sale/sale",
-        "text": "销售单"
+        "text": "售货单",
+        "iconPath": "/images/sale_icon.png",
+        "selectedIconPath": "/images/sale_select.png"
       },
       {
         "pagePath": "pages/depository/depository",
-        "text": "仓库"
+        "text": "仓库",
+        "iconPath": "/images/stock_icon.png",
+        "selectedIconPath": "/images/stock_select.png"
       }
     ]
   },
