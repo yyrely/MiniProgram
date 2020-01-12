@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/MirrorYan/MiniProgram/issues"
   },
-  "homepage": "https://github.com/MirrorYan/MiniProgram#readme"
+  "homepage": "https://github.com/MirrorYan/MiniProgram#readme",
+  "dependencies": {
+    "weui-miniprogram": "^0.2.1"
+  }
 }

@@ -1,4 +1,3 @@
-// pages/location/location.js
 const { URL, Request, SuccRequest } = require('../../utils/request.js')
 
 Page({
@@ -9,7 +8,14 @@ Page({
     currentPage: 0,
     totalPages: 0,
     showNum: null,
-    loading: false
+    loading: true,
+    loadSku: false,
+    skuId: null,
+    showModal: false,
+    sale: {
+      price: '',
+      number: ''
+    }
   },
   // Toggle Goods Click Event
   toggleGoods: function (e) {
@@ -21,7 +27,7 @@ Page({
     that.setData({
       skuList: [],
       showNum: productId,
-      loading: productId ? true : false
+      loadSku: productId ? true : false
     })
     productId != null &&
       Request({
@@ -31,14 +37,65 @@ Page({
           if (data) {
             that.setData({
               skuList: data.skuList,
-              loading: false
+              loadSku: false
             })
           }
         }
       })
   },
-  editGoods: function (e) {
-    
+  longPressSku: function (e) {
+    this.setData({
+      skuId: e.currentTarget.dataset.skuid,
+      showModal: true,
+      sale: {
+        price: '',
+        number: ''
+      }
+    })
+  },
+  // Input value listener
+  changePrice: function (e) {
+    this.setData({
+      ["sale.price"]: e.detail.value
+    })
+  },
+  changeNumber: function (e) {
+    this.setData({
+      ["sale.number"]: e.detail.value
+    })
+  },
+  // Modal button
+  tapDialogButton: function (e) {
+    let that = this,
+      { showNum, skuId, sale: {price, number}} = that.data
+    if (e.detail.index == 1) {
+      Request({
+        url: URL.saleSku,
+        method: "post",
+        data: {
+          productId: showNum,
+          skuId,
+          sellNums: number,
+          sellPrice: price
+        },
+        success: function (res) {
+          var data = SuccRequest(res)
+          console.log(data)
+          if (data) {
+            wx.showToast({
+              title: '出售成功',
+              duration: 1000
+            })
+          } 
+        }
+      })
+    }
+    that.setData({
+      skuId: null,
+      showModal: false,
+      ["sale.price"]: '',
+      ["sale.number"]: ''
+    })
   },
   /* LifeCycle-监听页面加载 */
   onLoad: function (options) {
@@ -51,7 +108,8 @@ Page({
           that.setData({
             list: data.content,
             currentPage: data.pageNum,
-            totalPages: data.totalPages
+            totalPages: data.totalPages,
+            loading: false
           })
         }
       }

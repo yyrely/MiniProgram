@@ -1,16 +1,14 @@
 // pages/sale/sale.js
+const { URL, Request, SuccRequest } = require('../../utils/request.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
+  /* Init data of page */
   data: {
 
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  /* LifeCycle--监听页面加载 */
   onLoad: function (options) {
 
   },
