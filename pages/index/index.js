@@ -1,21 +1,17 @@
-//index.js
-//获取应用实例
+const { URL, Request, SuccRequest } = require('../../utils/request.js')
 const app = getApp()
 
 Page({
+  /* Init data of Page */
   data: {
-    motto: 'Hello World',
+    saleInfo: {},
+    purcInfo: {},
+    stokeInfo: {},
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  // 页面加载
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
+  /* LifeCycle-监听页面加载 */
   onLoad: function () {
     if (app.globalData.userInfo) {
       this.setData({
@@ -34,7 +30,8 @@ Page({
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
-        success: res => {
+        success
+        : res => {
           app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
@@ -50,6 +47,42 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+  onShow: function () {
+    let that = this
+    Request({
+      url: URL.salStatis,
+      success: function (res) {
+        const data = SuccRequest(res)
+        if (data) {
+          that.setData({
+            saleInfo: data
+          })
+        }
+      }
+    })
+    Request({
+      url: URL.pucStatis,
+      success: function (res) {
+        const data = SuccRequest(res)
+        if (data) {
+          that.setData({
+            purcInfo: data
+          })
+        }
+      }
+    })
+    Request({
+      url: URL.stoStatis,
+      success: function (res) {
+        const data = SuccRequest(res)
+        if (data) {
+          that.setData({
+            stokeInfo: data
+          })
+        }
+      }
     })
   }
 })

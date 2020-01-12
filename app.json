@@ -3,12 +3,13 @@
     "pages/index/index",
     "pages/purchase/purchase",
     "pages/sale/sale",
-    "pages/depository/depository"
+    "pages/depository/depository",
+    "pages/login/login"
   ],
   "window": {
     "backgroundColor": "#fffef6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#a6e8a5",
+    "navigationBarBackgroundColor": "#baf4ea",
     "navigationBarTitleText": "商品管理中心",
     "navigationBarTextStyle": "black"
   },
@@ -17,13 +18,16 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页"
-      }, {
+      },
+      {
         "pagePath": "pages/purchase/purchase",
         "text": "进货单"
-      }, {
+      },
+      {
         "pagePath": "pages/sale/sale",
         "text": "销售单"
-      }, {
+      },
+      {
         "pagePath": "pages/depository/depository",
         "text": "仓库"
       }

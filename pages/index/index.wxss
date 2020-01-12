@@ -2,26 +2,27 @@
 .product-info {
   display: flex;
   width: 100%;
+  align-items: center;
   padding: 25rpx 30rpx;
 }
 .product-left {
-  padding-right: 30rpx;
-  margin-right: 30rpx;
+  width: 130rpx;
+  margin-right: 20px;
   font-size: 0;
-  border-right: 2px solid #a6e8a5;
 }
+.block-icon {
+  max-width: 130rpx;
+  height: 130rpx;
+}
+
 .product-right {
   flex: 1;
+  padding: 10px 20px;
+  border-left: 2px solid #baf4ea;
   overflow: hidden;
 }
 .product-right text {
   display: block;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  border-radius: 50%;
 }
 
 .userinfo-nickname {
