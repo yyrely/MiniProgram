@@ -5,7 +5,8 @@ const domain = 'http://www.chuncongcong.com:8040',
     salStatis: domain + '/api/sell/log/nums', /* 售货统计 */
     stoStatis: domain + '/api/sku/nums', /* 库存商品统计 */
     pucStatis: domain + '/api/purchase/log/nums', /* 进货统计 */
-    saleList: domain + '/api/sell/log/list', /* 售货日志列表 */
+    purcList: domain + '/api/purchase/log/list', /* 进货列表 */
+    saleList: domain + '/api/sell/log/list', /* 售货列表 */
     despList: domain + '/api/product/list', /* 库存列表 */
     skuList: domain + '/api/product/get/info/', /* 货品详情 */
     saleSku: domain + '/api/sku/sell', /* 售出商品 */

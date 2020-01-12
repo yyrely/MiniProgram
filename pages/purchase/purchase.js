@@ -1,15 +1,26 @@
-//logs.js
-const util = require('../../utils/util.js')
+const { URL, Request, SuccRequest } = require('../../utils/request.js')
 
 Page({
   data: {
-    purchases: [[], [], []]
+    pageNum: 1,
+    pageSize: 20,
+    purcList: []
   },
-  onLoad: function () {
-    this.setData({
-      logs: (wx.getStorageSync('logs') || []).map(log => {
-        return util.formatTime(new Date(log))
-      })
+  /* LifeCycle--监听页面加载 */
+  onLoad: function (options) {
+    const that = this,
+      { pageNum, pageSize } = that.data
+    Request({
+      url: `${URL.purcList}?pageNum=${pageNum}&pageSize=${pageSize}`,
+      success: function (res) {
+        const data = SuccRequest(res)
+        if (data) {
+          console.log(data.content)
+          that.setData({
+            purcList: data.content
+          })
+        }
+      }
     })
   }
 })

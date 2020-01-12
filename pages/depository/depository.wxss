@@ -1,4 +1,7 @@
 /* pages/location/location.wxss */
+.card-box {
+  padding: 0;
+}
 .goods-box {
   padding: 40px 30rpx 20px;
   overflow: hidden;
@@ -7,7 +10,7 @@
 }
 .goods-num {
   font-size: 16px;
-  color: #62d06f;
+  color: #87daff;
   position: absolute;
   right: 20rpx;
   top: 10px;
@@ -32,8 +35,6 @@
   padding: 5px;
   line-height: 1;
   font-size: 15px;
-  color: #fff;
-  background-color: #62d06f;
   border-radius: 5px;
   position: absolute;
   right: 20rpx;

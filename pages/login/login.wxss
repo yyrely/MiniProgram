@@ -32,6 +32,4 @@ view {
 }
 button {
   width: 350rpx;
-  color: #666;
-  background: #BAF4EA;
 }
