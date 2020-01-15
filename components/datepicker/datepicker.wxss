@@ -1,0 +1,23 @@
+.hide {
+  display: none;
+}
+.datepicker {
+  position: relative;
+  margin-bottom: 15px;
+}
+.date-btn {
+  display: block;
+  padding: 5px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 5px;
+  background: #baf4ea;
+}
+.calendar {
+  width: 100%;
+  background: #fff;
+  box-shadow: 1px 1px 5px #eee;
+  position: absolute;
+}
