@@ -1,0 +1,28 @@
+<!--pages/login/login.wxml-->
+<view class="main container">
+  <view class="login-box">
+    <view class="logo">
+      <image src="/images/shop.png" />
+    </view>
+    <view class="flex-row">
+      <label class="input-label">用户名：</label>
+      <input
+        class="input-text"
+        placeholder="用户名"
+        bind:blur="username"
+      />
+    </view>
+    <view class="flex-row">
+      <label class="input-label">密码：</label>
+      <input
+        class="input-text"
+        placeholder="密码"
+        password="true"
+        bind:blur="password"
+      />
+    </view>
+    <view>
+      <button bind:tap="login">登录</button>
+    </view>
+  </view>
+</view>

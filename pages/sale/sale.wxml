@@ -1,0 +1,26 @@
+<!--pages/sale/sale.wxml-->
+<!--index.wxml-->
+<view class="main container">
+  <view
+    wx:for="{{saleList}}"
+    wx:for-item="info"
+    wx:key="sellId"
+    class="card-box sale-box"
+  >
+    <view class="">商品名称：{{info.productName}}</view>
+    <view class="">商品编号：{{info.productNo}}</view>
+    <view class="">销售数量：{{info.sellNums}}</view>
+    <view class="">销售价格：{{info.sellPrice}}</view>
+    <view class="">金额总计：{{info.sellTotal}}</view>
+    <view class="">
+      规格属性：
+      <block
+        wx:for="{{info.valueList}}"
+        wx:for-item="attr"
+        wx:key="valueId"
+      >
+        <text class="product-attr">{{attr.valueName}}</text>
+      </block>
+    </view>
+  </view>
+</view>

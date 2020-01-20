@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<view class="main container">
+  <datepicker></datepicker>
+  <view class="card-box product-info">
+    <view class="product-left ">
+      <image class="block-icon" src="/images/sale.svg" />
+    </view>
+    <view class="product-right">
+      <view>销售金额：{{saleInfo.totalPrices || '0'}}</view>
+      <view>销售件数：{{saleInfo.totalNums || '0'}}</view>
+      <view>订单笔数：{{saleInfo.counts || '0'}}</view>
+    </view>
+  </view>
+  <view class="card-box product-info">
+    <view class="product-left">
+      <image class="block-icon" src="/images/purchase.svg" />
+    </view>
+    <view class="product-right">
+      <view>进货金额：{{purcInfo.totalPrices || '0'}}</view>
+      <view>进货件数：{{purcInfo.totalNums || '0'}}</view>
+      <view>订单笔数：{{purcInfo.counts || '0'}}</view>
+    </view>
+  </view>
+  <view class="card-box product-info">
+    <view class="product-left">
+      <image class="block-icon" src="/images/stoke.svg" />
+    </view>
+    <view class="product-right">
+      <text>库存总额：{{stokeInfo.totalPrice || '0'}}</text>
+      <text>库存总量：{{stokeInfo.totalNums || '0'}}</text>
+    </view>
+  </view>
+</view>

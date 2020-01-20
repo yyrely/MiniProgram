@@ -1,0 +1,10 @@
+<!--components/datepicker/datepicker.wxml-->
+<view class="datepicker">
+  <view class="date-btn" bind:tap="toggleCalendar">
+    {{chooseDate}}
+  </view>
+  <calendar
+    class="calendar {{hide && 'hide'}}"
+    calendarConfig="{{calendarConfig}}"
+  ></calendar>
+</view>

@@ -1,0 +1,82 @@
+/* pages/location/location.wxss */
+.card-box {
+  padding: 0;
+}
+.goods-box {
+  padding: 40px 30rpx 20px;
+  overflow: hidden;
+  position: relative;
+  transition: all .3s ease-in;
+}
+.goods-num {
+  font-size: 16px;
+  color: #87daff;
+  position: absolute;
+  right: 20rpx;
+  top: 10px;
+}
+.goods-num text {
+  font-weight: bold;
+}
+
+.sku-list {
+  padding: 0 30rpx;
+}
+.sku-item {
+  padding: 10px 10rpx;
+  border-top: 1px solid #eee; }
+  .sku-item:first {
+    border-top: none;
+  }
+
+.card-box .goods-btn {
+  display: none;
+  width: 65px;
+  padding: 5px;
+  line-height: 1;
+  font-size: 15px;
+  border-radius: 5px;
+  position: absolute;
+  right: 20rpx;
+  bottom: 10px;
+}
+.card-box.show .goods-btn {
+  display: block;
+}
+
+.sku-list {
+  height: 0;
+  overflow: hidden;
+  border-top: 1px solid #eee;
+  transition: all 1s ease-out;
+}
+.card-box.show .sku-list {
+  height: auto;
+}
+.sku-inline {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.load-sku {
+  padding: 10px;
+}
+
+.input-row {
+  width: 100%;
+  display: flex;
+  margin: 10px 0;
+}
+.input-label,
+.input-text {
+  height: 30px;
+  line-height: 30px;
+}
+.input-label {
+  display: inline-block;
+  white-space: nowrap;
+}
+.input-text {
+  flex: 1;
+  border: 1px solid #eee;
+}

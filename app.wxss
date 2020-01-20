@@ -1,0 +1,50 @@
+/**app.wxss**/
+@import './miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+
+view, button {
+  box-sizing: border-box;
+}
+button {
+  min-height: 0;
+  color: #fff;
+  background: #87daff;
+  border: none;
+}
+input {
+  padding: 8px 10px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+}
+.main {
+  height: 100%;
+  padding: 37.5rpx 37.5rpx;
+  color: #555;
+}
+.hide {
+  display: none;
+}
+.flex-row {
+  display: flex;
+}
+.flex-row .input-text {
+  flex: 1;
+}
+
+.card-box {
+  padding: 25rpx 30rpx;
+  margin-bottom: 35rpx;
+  border: 1px solid #eee;
+  border-radius: 10rpx;
+  box-shadow: 1px 1px 5px #eee;
+}
+
+.product-attr {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 3px 5px;
+  line-height: 1;
+  font-size: 16px;
+  color: #fff;
+  background: #87daff;
+  border-radius: 3px;
+}
