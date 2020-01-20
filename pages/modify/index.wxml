@@ -22,8 +22,7 @@
           <picker
             bind:change="bdTypeChange"
             value="{{categoryIndex}}"
-            range="{{category}}"
-          >
+            range="{{category}}">
             <view
               class="weui-select weui-select_in-select-after"
             >{{category[categoryIndex]}}</view>
@@ -33,8 +32,7 @@
       <block
         wx:for="{{attrs}}"
         wx:for-item="attr"
-        wx:key="attributeId"
-      >
+        wx:key="attributeId">
         <mp-cell title="{{attr.attributeName}}">
           <view
             wx:for="{{attr.valuePos}}"
@@ -48,13 +46,34 @@
         </mp-cell>
       </block>
     </mp-cells>
+    <mp-cells>
+      <block
+        wx:for="{{attrs}}"
+        wx:for-item="attr"
+        wx:key="attributeId">
+        <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">{{attr.attributeName}}</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker
+            bind:change="bdTypeChange"
+            value="{{categoryIndex}}"
+            range="{{category}}">
+            <view
+              class="weui-select weui-select_in-select-after"
+            >{{category[categoryIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+      </block>
+    </mp-cells>
   </mp-form>
   <mp-dialog
     show="{{showModal}}"
     title="添加属性值"
     bind:buttontap="bdModalBtn"
-    buttons="{{[{text: '取消'}, {text: '确认'}]}}"
-  >
+    buttons="{{[{text: '取消'}, {text: '确认'}]}}">
     <view class="flex-row">
       <label class="input-label">{{mdAttrName}}：</label>
       <input

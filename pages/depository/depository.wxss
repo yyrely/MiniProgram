@@ -1,4 +1,20 @@
 /* pages/location/location.wxss */
+.add-search {
+  display: flex;
+  margin-bottom: 10px;
+}
+.add-search .add {
+  margin: 0 10px 0 0;
+  padding: 0 10px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #87daff;
+  border-radius: 5px;
+}
+.add-search .search {
+  flex: 1;
+}
 .card-box {
   padding: 0;
 }

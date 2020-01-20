@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "mp-searchbar": "/components/weui/searchbar/searchbar",
     "mp-loading": "/components/weui/loading/loading",
     "mp-dialog": "/components/weui/dialog/dialog"
   },
