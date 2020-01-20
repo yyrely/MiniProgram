@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "货品编辑",
+  "usingComponents": {
+    "mp-form": "/components/weui/form/form",
+    "mp-cells": "/components/weui/cells/cells",
+    "mp-cell": "/components/weui/cell/cell",
+    "mp-dialog": "/components/weui/dialog/dialog"
+  }
+}

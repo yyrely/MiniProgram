@@ -1,0 +1,24 @@
+/* pages/modify/index.wxss */
+.main {
+  padding: 5px;
+}
+input:not(.input-text) {
+  padding-top: 0;
+  padding-bottom: 0;
+  border: none;
+}
+.flex-row {
+  align-items: center;
+}
+.weui-cell_select {
+  padding-left: 16px;
+}
+.product-ctg:first-child,
+.product-attr:first-child {
+  margin-left: 10px;
+}
+.product-attr.last {
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 18px;
+}

@@ -1,0 +1,68 @@
+<!--pages/modify/index.wxml-->
+<view class="main container">
+  <mp-form>
+    <mp-cells>
+      <mp-cell title="货品编号">
+        <input
+          class="weui-input"
+          placeholder="请输入货品编号"
+        />
+      </mp-cell>
+      <mp-cell title="货品名称">
+        <input
+          class="weui-input"
+          placeholder="请输入货品名称"
+        />
+      </mp-cell>
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">货品类别</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker
+            bind:change="bdTypeChange"
+            value="{{categoryIndex}}"
+            range="{{category}}"
+          >
+            <view
+              class="weui-select weui-select_in-select-after"
+            >{{category[categoryIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+      <block
+        wx:for="{{attrs}}"
+        wx:for-item="attr"
+        wx:key="attributeId"
+      >
+        <mp-cell title="{{attr.attributeName}}">
+          <view
+            wx:for="{{attr.valuePos}}"
+            wx:for-item="value"
+            wx:key="valueId"
+            data-attrid="{{attr.attributeId}}"
+            data-attrname="{{attr.attributeName}}"
+            class="product-attr {{value.valueName == '+' ? 'last' : ''}}"
+            bind:tap="{{value.valueName == '+' ? 'bdOpenModal' : ''}}"
+          >{{value.valueName}}</view>
+        </mp-cell>
+      </block>
+    </mp-cells>
+  </mp-form>
+  <mp-dialog
+    show="{{showModal}}"
+    title="添加属性值"
+    bind:buttontap="bdModalBtn"
+    buttons="{{[{text: '取消'}, {text: '确认'}]}}"
+  >
+    <view class="flex-row">
+      <label class="input-label">{{mdAttrName}}：</label>
+      <input
+        type="digit"
+        bind:blur="bdInputAttr"
+        placeholder="请输入新增内容"
+        class="input-text"
+      />
+    </view>
+  </mp-dialog>
+</view>

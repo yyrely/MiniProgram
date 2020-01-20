@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/modify/index",
     "pages/index/index",
     "pages/purchase/purchase",
     "pages/sale/sale",

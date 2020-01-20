@@ -1,6 +1,7 @@
 <!--pages/sale/sale.wxml-->
 <!--index.wxml-->
 <view class="main container">
+  <datepicker bind:datefresh="dateFresh" />
   <view
     wx:for="{{saleList}}"
     wx:for-item="info"

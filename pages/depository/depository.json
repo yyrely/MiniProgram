@@ -1,7 +1,7 @@
 {
   "usingComponents": {
-    "mp-loading": "/miniprogram_npm/weui-miniprogram/loading/loading",
-    "mp-dialog": "/miniprogram_npm/weui-miniprogram/dialog/dialog"
+    "mp-loading": "/components/weui/loading/loading",
+    "mp-dialog": "/components/weui/dialog/dialog"
   },
   "navigationBarTitleText": "个人仓库"
 }

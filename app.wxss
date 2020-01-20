@@ -1,5 +1,5 @@
 /**app.wxss**/
-@import './miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+@import './components/weui/weui-wxss/dist/style/weui.wxss';
 
 view, button {
   box-sizing: border-box;
@@ -38,6 +38,7 @@ input {
   box-shadow: 1px 1px 5px #eee;
 }
 
+.product-ctg,
 .product-attr {
   display: inline-block;
   margin-right: 10px;
@@ -45,6 +46,6 @@ input {
   line-height: 1;
   font-size: 16px;
   color: #fff;
-  background: #87daff;
-  border-radius: 3px;
-}
+  border-radius: 3px; }
+.product-ctg { background: #ffe081; }
+.product-attr { background: #87daff; }

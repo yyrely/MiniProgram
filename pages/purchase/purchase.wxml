@@ -1,5 +1,6 @@
 <!--pages/purchase/purchase.wxml-->
 <view class="main container">
+  <datepicker bind:datefresh="dateFresh" />
   <view
     wx:for="{{purcList}}"
     wx:for-item="info"

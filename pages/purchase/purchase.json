@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "今日进货单",
-  "usingComponents": {}
+  "usingComponents": {
+    "datepicker": "/components/datepicker/datepicker"
+  }
 }

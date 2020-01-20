@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="main container">
-  <datepicker></datepicker>
+  <datepicker bind:datefresh="dateFresh" />
   <view class="card-box product-info">
     <view class="product-left ">
       <image class="block-icon" src="/images/sale.svg" />

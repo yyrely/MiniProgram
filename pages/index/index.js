@@ -8,15 +8,17 @@ Page({
     purcInfo: {},
     stokeInfo: {}
   },
-  /* Event Listeners */
-  toggleCalendar: function (e) {
-    console.log(1);
-  },
-  /* LifeCycle-监听页面显示 */
-  onShow: function () {
-    let that = this
+  pageRequest: function (date) {
+    let that = this,
+      { salStatis, pucStatis, stoStatis } = URL
+    if (date) {
+      const dates = date.split(' ~ ')
+      salStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
+      pucStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
+      stoStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
+    }
     Request({
-      url: URL.salStatis,
+      url: salStatis,
       success: function (res) {
         const data = SuccRequest(res)
         if (data) {
@@ -27,7 +29,7 @@ Page({
       }
     })
     Request({
-      url: URL.pucStatis,
+      url: pucStatis,
       success: function (res) {
         const data = SuccRequest(res)
         if (data) {
@@ -38,7 +40,7 @@ Page({
       }
     })
     Request({
-      url: URL.stoStatis,
+      url: stoStatis,
       success: function (res) {
         const data = SuccRequest(res)
         if (data) {
@@ -48,5 +50,14 @@ Page({
         }
       }
     })
+  },
+  /* Event Listeners */
+  dateFresh: function (e) {
+    let {date} = e.detail
+    this.pageRequest(date)
+  },
+  /* LifeCycle-监听页面显示 */
+  onShow: function () {
+    this.pageRequest()
   }
 })

@@ -10,6 +10,9 @@ const domain = 'http://www.chuncongcong.com:8040',
     despList: domain + '/api/product/list', /* 库存列表 */
     skuList: domain + '/api/product/get/info/', /* 货品详情 */
     saleSku: domain + '/api/sku/sell', /* 售出商品 */
+    category: domain + '/api/category/list', /* 分类列表 */
+    attrValue: domain + '/api/attribute/value/get/', /* 规格及属性列表 */
+    addValue: domain + '/api/value/save' /* 增加属性值 */
   }
 
 function Request (obj) {
