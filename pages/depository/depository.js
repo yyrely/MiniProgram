@@ -100,26 +100,7 @@ Page({
       ["sale.number"]: ''
     })
   },
-  /* LifeCycle-监听页面加载 */
-  onLoad: function (options) {
-    this.loadStock({ loading: false })
-    let that = this
-    Request({
-      url: URL.despList,
-      success: function (res) {
-        var data = SuccRequest(res)
-        if (data) {
-          that.setData({
-            list: data.content,
-            currentPage: data.pageNum,
-            totalPages: data.totalPages,
-            loading: false
-          })
-        }
-      }
-    })
-  },
-
+  // Load Stock
   loadStock: function (load={}, num=1) {
     let that = this,
       url = `${URL.despList}?pageNum=${num}&pageSize=20`
@@ -138,6 +119,10 @@ Page({
         }
       }
     })
+  },
+  /* LifeCycle-监听页面加载 */
+  onLoad: function (options) {
+    this.loadStock({ loading: false })
   },
 
   /* Pull-up Loading */
