@@ -160,6 +160,9 @@ Component({
             });
             this.triggerEvent('blur', e.detail);
         },
+        inputComfirm: function inputComfirm(e) {
+            this.triggerEvent('confirm', e.detail);
+        },
         showInput: function showInput() {
             this.setData({
                 focus: true,

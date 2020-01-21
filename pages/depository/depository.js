@@ -83,7 +83,6 @@ Page({
         },
         success: function (res) {
           var data = SuccRequest(res)
-          console.log(data)
           if (data) {
             wx.showToast({
               title: '出售成功',
@@ -101,21 +100,26 @@ Page({
     })
   },
   // Load Stock
-  loadStock: function (load={}, num=1) {
+  loadStock: function (load={}, {num=1, number} = {}) {
     let that = this,
       url = `${URL.despList}?pageNum=${num}&pageSize=20`
+    if (number && number != '') {
+      url += '&productNo=' + number
+      num = 1
+    }
     Request({
       url,
       success: function (res) {
         var data = SuccRequest(res)
         if (data) {
-          let list = that.data.list.push(data.content)
+          let list = that.data.list.concat(data.content)
           that.setData({
             list,
             currentPage: data.pageNum,
             totalPages: data.totalPages,
             ...load
           })
+          console.log(that.data.list)
         }
       }
     })
@@ -124,7 +128,13 @@ Page({
   onLoad: function (options) {
     this.loadStock({ loading: false })
   },
-
+  bdSearchConfirm: function(e) {
+    this.setData({
+      loading: true,
+      list: []
+    })
+    this.loadStock({ loading: false }, {number: e.detail.value})
+  },
   /* Pull-up Loading */
   onReachBottom: function () {
     let {pageNum, totalPages, loadMore} = this.data
@@ -133,7 +143,7 @@ Page({
       loadMore: true,
       pageNum: that.data.pageNum + 1
     })
-    this.loadStock({loadMore: false}, pageNum+1)
+    this.loadStock({loadMore: false}, {num: pageNum+1})
   },
 
   /**

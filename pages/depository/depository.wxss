@@ -1,6 +1,5 @@
 /* pages/location/location.wxss */
 .add-search {
-  display: flex;
   margin-bottom: 10px;
 }
 .add-search .add {
@@ -13,8 +12,15 @@
   border-radius: 5px;
 }
 .add-search .search {
-  flex: 1;
-}
+  padding: 0;
+  background: inherit; }
+  .search .weui-search-bar__form {
+    border: 1px solid #eee;
+  }
+  .search input {
+    padding: 0;
+    border: none;
+  }
 .card-box {
   padding: 0;
 }

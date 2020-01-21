@@ -1,7 +1,7 @@
 /**app.wxss**/
 @import './components/weui/weui-wxss/dist/style/weui.wxss';
 
-view, button {
+view, button, input {
   box-sizing: border-box;
 }
 button {

@@ -2,7 +2,10 @@
 <view class="main container">  
   <view class="add-search">
     <view class="add">+</view>
-    <mp-searchbar ext-class="search"></mp-searchbar>
+    <mp-searchbar
+      bind:confirm="bdSearchConfirm"
+      ext-class="search"
+    ></mp-searchbar>
   </view>
   <mp-loading
     type="dot-gray"
