@@ -10,6 +10,7 @@ Page({
     showNum: null,
     loading: true,
     loadSku: false,
+    loadMore: false,
     skuId: null,
     showModal: false,
     sale: {
@@ -116,11 +117,13 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  /* Pull-up Loading*/
+  onReachBottom: function () {
+    let that = this
+    that.setData({
+      loadMore: true,
+      pageNum: that.data.pageNum + 1
+    })
   },
 
   /**
@@ -131,108 +134,9 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
 
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })
-
-// {
-//   "productId": 8,
-//   "userId": 1,
-//   "categoryId": 1,
-//   "productNo": "test00001",
-//   "productName": "测试01",
-//   "productPic": null,
-//   "productDesc": null,
-//   "skuList": [
-//     {
-//       "skuId": 11,
-//       "productId": 8,
-//       "skuInPrice": 100.00,
-//       "skuOutPrice": 220.00,
-//       "skuStock": 6,
-//       "skuDesc": null,
-//       "valueList": [
-//         {
-//           "valueId": 1,
-//           "attributeId": 1,
-//           "attributeName": "颜色",
-//           "valueName": "黑色"
-//         },
-//         {
-//           "valueId": 3,
-//           "attributeId": 2,
-//           "attributeName": "尺码",
-//           "valueName": "X"
-//         }
-//       ]
-//     },
-//     {
-//       "skuId": 12,
-//       "productId": 8,
-//       "skuInPrice": 110.00,
-//       "skuOutPrice": 220.00,
-//       "skuStock": 5,
-//       "skuDesc": null,
-//       "valueList": [
-//         {
-//           "valueId": 2,
-//           "attributeId": 1,
-//           "attributeName": "颜色",
-//           "valueName": "红色"
-//         },
-//         {
-//           "valueId": 3,
-//           "attributeId": 2,
-//           "attributeName": "尺码",
-//           "valueName": "X"
-//         }
-//       ]
-//     },
-//     {
-//       "skuId": 14,
-//       "productId": 8,
-//       "skuInPrice": 120.00,
-//       "skuOutPrice": 220.00,
-//       "skuStock": 6,
-//       "skuDesc": null,
-//       "valueList": [
-//         {
-//           "valueId": 1,
-//           "attributeId": 1,
-//           "attributeName": "颜色",
-//         }
-//       ]
-//     }
-//   ]
-// }

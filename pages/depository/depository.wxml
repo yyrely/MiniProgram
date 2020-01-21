@@ -2,19 +2,17 @@
 <view class="main container">
   <mp-loading
     type="dot-gray"
-    show="{{loading}}"
-  ></mp-loading>
+    show="{{loading}}" 
+  />
   <view
     wx:for="{{list}}"
     wx:for-item="item"
     wx:key="productId"
-    class="card-box {{showNum == item.productId ? 'show' : '' }}"
-  >
+    class="card-box {{showNum == item.productId ? 'show' : '' }}">
     <view
       bind:tap="toggleGoods"
       data-id="{{item.productId}}"
-      class="goods-box"
-    >
+      class="goods-box">
       <view class="goods-num">货号：<text>{{item.productNo}}</text></view>
       <view class="goods-name">货品名称：{{item.productName}}</view>
       <view>货品描述：<text>{{item.productDesc || '暂无描述'}}</text></view>
@@ -25,7 +23,7 @@
         extClass="load-sku"
         type="dot-gray"
         show="{{loadSku}}"
-      ></mp-loading>
+      />
       <view
         wx:if="{{showNum === item.productId}}"
         wx:for="{{skuList}}"
@@ -33,8 +31,7 @@
         wx:key="skuId"
         data-skuid="{{sku.skuId}}"
         bind:longpress="longPressSku"
-        class="sku-item"
-      >
+        class="sku-item">
         <block wx:for="{{sku.valueList}}" wx:for-item="value" wx:key="valueId">
           <text class="sku-inline sku-attribute">{{value.attributeName}}：{{value.valueName}}</text>
         </block>
@@ -50,8 +47,7 @@
     title="商品出售"
     show="{{showModal}}"
     bind:buttontap="tapDialogButton"
-    buttons="{{[{text: '取消'}, {text: '确认'}]}}"
-  >
+    buttons="{{[{text: '取消'}, {text: '确认'}]}}">
     <view class="input-row">
       <label class="input-label">销售价格：</label>
       <input
