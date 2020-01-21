@@ -58,7 +58,6 @@ Page({
   /* LifeCycle--监听页面加载 */
   onLoad: function (options) {
     const token = wx.getStorageSync('token') || null
-    console.log(options)
     if (token) {
       wx.navigateTo({
         url: '/pages/index/index',

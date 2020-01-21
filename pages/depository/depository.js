@@ -3,6 +3,8 @@ const { URL, Request, SuccRequest } = require('../../utils/request.js')
 Page({
   /* Init data of Page */
   data: {
+    pageNum: 1,
+    pageSize: 20,
     list: [],
     skuList: [],
     currentPage: 0,
@@ -100,6 +102,7 @@ Page({
   },
   /* LifeCycle-监听页面加载 */
   onLoad: function (options) {
+    this.loadStock({ loading: false })
     let that = this
     Request({
       url: URL.despList,
@@ -117,13 +120,35 @@ Page({
     })
   },
 
-  /* Pull-up Loading*/
+  loadStock: function (load={}, num=1) {
+    let that = this,
+      url = `${URL.despList}?pageNum=${num}&pageSize=20`
+    Request({
+      url,
+      success: function (res) {
+        var data = SuccRequest(res)
+        if (data) {
+          let list = that.data.list.push(data.content)
+          that.setData({
+            list,
+            currentPage: data.pageNum,
+            totalPages: data.totalPages,
+            ...load
+          })
+        }
+      }
+    })
+  },
+
+  /* Pull-up Loading */
   onReachBottom: function () {
-    let that = this
+    let {pageNum, totalPages, loadMore} = this.data
+    if (loadMore && pageNum >= totalPages) return
     that.setData({
       loadMore: true,
       pageNum: that.data.pageNum + 1
     })
+    this.loadStock({loadMore: false}, pageNum+1)
   },
 
   /**
