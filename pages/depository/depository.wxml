@@ -9,7 +9,7 @@
   </view>
   <mp-loading
     type="dot-gray"
-    show="{{loading}}" 
+    show="{{loading}}"
   />
   <view
     wx:for="{{list}}"
@@ -76,4 +76,9 @@
       />
     </view>
   </mp-dialog>
+  <mp-loading
+    type="dot-gray"
+    show="{{loadMore}}"
+  />
+  <view wx:if="{{ pageNum >= totalpages }}"></view>
 </view>

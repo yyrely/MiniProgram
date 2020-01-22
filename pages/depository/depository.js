@@ -100,7 +100,7 @@ Page({
     })
   },
   // Load Stock
-  loadStock: function (load={}, {num=1, number} = {}) {
+  loadStock: function ({num=1, load={}, number} = {}) {
     let that = this,
       url = `${URL.despList}?pageNum=${num}&pageSize=20`
     if (number && number != '') {
@@ -119,21 +119,25 @@ Page({
             totalPages: data.totalPages,
             ...load
           })
-          console.log(that.data.list)
         }
       }
     })
   },
   /* LifeCycle-监听页面加载 */
   onLoad: function (options) {
-    this.loadStock({ loading: false })
+    this.loadStock({
+      load: { loading: false }
+    })
   },
   bdSearchConfirm: function(e) {
     this.setData({
       loading: true,
       list: []
     })
-    this.loadStock({ loading: false }, {number: e.detail.value})
+    this.loadStock({
+      load: { loading: false },
+      number: e.detail.value
+    })
   },
   /* Pull-up Loading */
   onReachBottom: function () {
