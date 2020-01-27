@@ -9,7 +9,7 @@
       <input
         class="input-text"
         placeholder="用户名"
-        bind:blur="username"
+        bind:input="username"
       />
     </view>
     <view class="flex-row">
@@ -18,7 +18,7 @@
         class="input-text"
         placeholder="密码"
         password="true"
-        bind:blur="password"
+        bind:input="password"
       />
     </view>
     <view>

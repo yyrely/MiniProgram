@@ -13,9 +13,8 @@ input:not(.input-text) {
 .weui-cell_select {
   padding-left: 16px;
 }
-.product-ctg:first-child,
-.product-attr:first-child {
-  margin-left: 10px;
+.product-attr {
+  margin-bottom: 5px;
 }
 .product-attr.last {
   border-radius: 50%;

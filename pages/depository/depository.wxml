@@ -1,15 +1,20 @@
 <!--pages/location/location.wxml-->
 <view class="main container">  
   <view class="add-search">
-    <view class="add">+</view>
+    <view class="add">
+      <navigator url="../modify/index">+</navigator>
+    </view>
     <mp-searchbar
       bind:confirm="bdSearchConfirm"
       ext-class="search"
+      cancel="false"
     ></mp-searchbar>
   </view>
   <mp-loading
-    type="dot-gray"
     show="{{loading}}"
+    type="dot-gray"
+    animated="true"
+    duration="{{900}}"
   />
   <view
     wx:for="{{list}}"
@@ -27,27 +32,33 @@
     </view>
     <view class="sku-list" wx:if="{{showNum === item.productId}}">
       <mp-loading
-        extClass="load-sku"
         type="dot-gray"
         show="{{loadSku}}"
+        extClass="load-sku"
+        animated="true"
+        duration="{{900}}"
       />
-      <view
-        wx:if="{{showNum === item.productId}}"
-        wx:for="{{skuList}}"
-        wx:for-item="sku"
-        wx:key="skuId"
-        data-skuid="{{sku.skuId}}"
-        bind:longpress="longPressSku"
-        class="sku-item">
-        <block wx:for="{{sku.valueList}}" wx:for-item="value" wx:key="valueId">
-          <text class="sku-inline sku-attribute">{{value.attributeName}}：{{value.valueName}}</text>
-        </block>
-        <view>
-          <view class="sku-inline">商品进价：<text>￥</text>{{sku.skuInPrice}}</view>
-          <view class="sku-inline">商品售价：<text>￥</text>{{sku.skuOutPrice}}</view>
+      <view>
+        <view
+          wx:if="{{showNum === item.productId}}"
+          wx:for="{{skuList}}"
+          wx:for-item="sku"
+          wx:key="skuId"
+          data-skuid="{{sku.skuId}}"
+          bind:longpress="longPressSku"
+          class="sku-item">
+          <block wx:for="{{sku.valueList}}" wx:for-item="value" wx:key="valueId">
+            <text class="sku-inline sku-attribute">{{value.attributeName}}：{{value.valueName}}</text>
+          </block>
+          <view>
+            <view class="sku-inline">商品进价：<text>￥</text>{{sku.skuInPrice}}</view>
+            <view class="sku-inline">商品售价：<text>￥</text>{{sku.skuOutPrice}}</view>
+          </view>
+          <view class="sku-inline">商品库存：{{sku.skuStock}}</view>
         </view>
-        <view class="sku-inline">商品库存：{{sku.skuStock}}</view>
       </view>
+
+      
     </view>
   </view>
   <mp-dialog
@@ -79,6 +90,8 @@
   <mp-loading
     type="dot-gray"
     show="{{loadMore}}"
+    animated="true"
+    duration="{{900}}"
   />
   <view wx:if="{{ pageNum >= totalpages }}"></view>
 </view>

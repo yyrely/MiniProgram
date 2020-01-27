@@ -40,8 +40,9 @@ Page({
           if (data) {
             that.setData({
               skuList: data.skuList,
-              loadSku: false
+              loadSku: !that.data.loadSku
             })
+            console.log(that.data.loadSku)
           }
         }
       })
