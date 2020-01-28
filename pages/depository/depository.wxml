@@ -71,7 +71,7 @@
       <input
         type="digit"
         value="{{sale.price}}"
-        bind:blur="changePrice"
+        bind:input="changePrice"
         placeholder="售价/元"
         class="input-text"
       />
@@ -81,7 +81,7 @@
       <input
         type="number"
         value="{{sale.number}}"
-        bind:blur="changeNumber"
+        bind:input="changeNumber"
         placeholder="数量/件"
         class="input-text"
       />

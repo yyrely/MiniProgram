@@ -21,10 +21,12 @@ Page({
   data: {
     pageNum: 1,
     pageSize: 20,
-    purcList: []
+    purcList: [],
+    date: null
   },
-  pageRequest: function ({date, num=1, size=20} = {}) {
-    let that = this
+  pageRequest: function ({num=1, size=20} = {}) {
+    let that = this,
+        { date } = that.data
     if (!date) date = handleDate()
     const dates = date.split(' ~ '),
       url = `${URL.purcList}?pageNum=${num}&pageSize=${size}` 
@@ -44,10 +46,11 @@ Page({
   /* Event Listeners */
   dateFresh: function (e) {
     let { date } = e.detail
-    this.pageRequest({date})
+    this.setData({ date })
+    this.pageRequest()
   },
   /* LifeCycle--监听页面加载 */
-  onLoad: function (options) {
+  onShow: function () {
     this.pageRequest()
   }
 })

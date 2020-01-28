@@ -42,7 +42,6 @@ Page({
               skuList: data.skuList,
               loadSku: !that.data.loadSku
             })
-            console.log(that.data.loadSku)
           }
         }
       })

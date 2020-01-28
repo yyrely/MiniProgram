@@ -23,10 +23,12 @@ Page({
   data: {
     pageNum: 1,
     pageSize: 20,
-    saleList: []
+    saleList: [],
+    date: null
   },
-  pageRequest: function ({date, num=1, size=20} = {}) {
-    let that = this
+  pageRequest: function ({ num=1, size=20 } = {}) {
+    let that = this,
+        { date } = this.data
     if (!date) date = handleDate()
     const dates = date.split(' ~ '),
       url = `${URL.saleList}?pageNum=${num}&pageSize=${size}`
@@ -46,55 +48,17 @@ Page({
   /* Event Listeners */
   dateFresh: function (e) {
     let { date } = e.detail
-    this.pageRequest({ date })
-  },
-  /* LifeCycle--监听页面加载 */
-  onLoad: function (options) {
+    this.setData({ date })
     this.pageRequest()
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
   },
   /* LifeCycle--监听页面显示 */
   onShow: function () {
-    
+    this.pageRequest()
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   }
 })
