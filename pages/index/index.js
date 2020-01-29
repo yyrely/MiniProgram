@@ -1,29 +1,33 @@
-const { URL, Request, SuccRequest } = require('../../utils/request.js')
-const app = getApp()
+import { handleDate } from '../../utils/util.js'
+import { URL, Request, SuccRequest } from '../../utils/request.js'
 
 Page({
   /* Init data of Page */
   data: {
     saleInfo: {},
     purcInfo: {},
-    stokeInfo: {}
+    stokeInfo: {},
+    salLoad: true,
+    pucLoad: true,
+    stoLoad: true,
+    date: handleDate()
   },
-  pageRequest: function (date) {
+  pageLoad: function () {
     let that = this,
+      { date } = this.data,
       { salStatis, pucStatis, stoStatis } = URL
-    if (date) {
-      const dates = date.split(' ~ ')
-      salStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
-      pucStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
-      stoStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
-    }
+    const dates = date.split(' ~ ')
+    salStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
+    pucStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
+    stoStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
     Request({
       url: salStatis,
       success: function (res) {
         const data = SuccRequest(res)
         if (data) {
           that.setData({
-            saleInfo: data
+            saleInfo: data,
+            salLoad: false
           })
         }
       }
@@ -34,7 +38,8 @@ Page({
         const data = SuccRequest(res)
         if (data) {
           that.setData({
-            purcInfo: data
+            purcInfo: data,
+            pucLoad: false
           })
         }
       }
@@ -45,7 +50,8 @@ Page({
         const data = SuccRequest(res)
         if (data) {
           that.setData({
-            stokeInfo: data
+            stokeInfo: data,
+            stoLoad: false
           })
         }
       }
@@ -54,10 +60,16 @@ Page({
   /* Event Listeners */
   dateFresh: function (e) {
     let {date} = e.detail
-    this.pageRequest(date)
+    this.pageLoad()
   },
   /* LifeCycle-监听页面显示 */
   onShow: function () {
-    this.pageRequest()
+    this.pageLoad()
+  },
+  /* 下拉刷新 */
+  onPullDownRefresh: function() {
+    const { salLoad, pucLoad, stoLoad } = this.data
+    if (salLoad || pucLoad || stoLoad) return
+    this.pageLoad()
   }
 })

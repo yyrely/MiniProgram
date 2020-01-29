@@ -1,5 +1,4 @@
-// pages/login/login.js
-const { URL, Request, SuccRequest } = require('../../utils/request.js')
+import { URL, Request, SuccRequest } from '../../utils/request.js'
 
 Page({
   /* Init data of page */
@@ -45,7 +44,7 @@ Page({
         if (data) {
           wx.showToast({
             title: '登录成功！',
-            duration: 1000,
+            duration: 2000,
             complete: function () {
               wx.setStorageSync('token', data.token)
               wx.switchTab({ url: '/pages/index/index' })
