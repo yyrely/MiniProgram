@@ -1,7 +1,6 @@
 {
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "datepicker": "/components/datepicker/datepicker"
-  },
-  "backgroundTextStyle": "dark",
-  "enablePullDownRefresh": true
+  }
 }

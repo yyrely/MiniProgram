@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "今日进货单",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "datepicker": "/components/datepicker/datepicker"
   }

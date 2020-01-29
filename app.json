@@ -9,7 +9,7 @@
   ],
   "window": {
     "backgroundColor": "#fffef6",
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#baf4ea",
     "navigationBarTitleText": "商品管理中心",
     "navigationBarTextStyle": "black"

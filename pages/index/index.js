@@ -16,6 +16,11 @@ Page({
     let that = this,
       { date } = this.data,
       { salStatis, pucStatis, stoStatis } = URL
+    that.setData({
+      salLoad: true,
+      pucLoad: true,
+      stoLoad: true
+    })
     const dates = date.split(' ~ ')
     salStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
     pucStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
@@ -59,7 +64,8 @@ Page({
   },
   /* Event Listeners */
   dateFresh: function (e) {
-    let {date} = e.detail
+    let { date } = e.detail
+    this.setData({ date })
     this.pageLoad()
   },
   /* LifeCycle-监听页面显示 */
