@@ -1,4 +1,5 @@
-const { URL, Request, SuccRequest } = require('../../utils/request.js')
+import { handleDate } from '../../utils/util.js'
+import { URL, Request, SuccRequest } from '../../utils/request.js'
 
 Page({
   /* Init data of Page */
@@ -100,8 +101,9 @@ Page({
     })
   },
   // Load Stock
-  loadStock: function ({num=1, load={}, number} = {}) {
+  loadStock: function ({load={}, number} = {}) {
     let that = this,
+      num = that.data.pageNum,
       url = `${URL.despList}?pageNum=${num}&pageSize=20`
     if (number && number != '') {
       url += '&productNo=' + number
@@ -139,6 +141,14 @@ Page({
       number: e.detail.value
     })
   },
+  /* 下拉刷新 */
+  onPullDownRefresh: function () {
+    const { loading } = this.data
+    if (loading) return
+    this.loadStock({
+      load: { loading: false }
+    })
+  },
   /* Pull-up Loading */
   onReachBottom: function () {
     let {pageNum, totalPages, loadMore} = this.data
@@ -147,20 +157,8 @@ Page({
       loadMore: true,
       pageNum: that.data.pageNum + 1
     })
-    this.loadStock({loadMore: false}, {num: pageNum+1})
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+    this.loadStock({
+      load: { loadMore: false }
+    })
   }
 })
