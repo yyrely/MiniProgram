@@ -1,4 +1,3 @@
-<!--pages/modify/index.wxml-->
 <view class="main container">
   <mp-form>
     <mp-cells>
@@ -46,28 +45,53 @@
         </mp-cell>
       </block>
     </mp-cells>
-    <mp-cells>
-      <block
-        wx:for="{{attrs}}"
-        wx:for-item="attr"
-        wx:key="attributeId">
-        <view class="weui-cell weui-cell_select">
-        <view class="weui-cell__hd weui-cell__hd_in-select-after">
-          <view class="weui-label">{{attr.attributeName}}</view>
-        </view>
-        <view class="weui-cell__bd">
-          <picker
-            bind:change="bdTypeChange"
-            value="{{categoryIndex}}"
-            range="{{category}}">
-            <view
-              class="weui-select weui-select_in-select-after"
-            >{{category[categoryIndex]}}</view>
-          </picker>
-        </view>
-      </view>
-      </block>
-    </mp-cells>
+    <block
+      wx:for="{{products}}"
+      wx:for-item="product"
+      wx:key="product">
+      <mp-cells ext-class="product-box">
+        <block
+          wx:for="{{attrs}}"
+          wx:for-item="attr"
+          wx:key="attributeId">
+          <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">{{attr.attributeName}}</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker
+                bind:change="bdValueChange"
+                data-attrid="{{attr.attributeId}}"
+                value="{{attr.valueIndex}}"
+                range="{{attr.valueNames}}">
+                <view class="weui-select weui-select_in-select-after"
+                >{{attr.valueNames[attr.valueIndex]}}</view>
+              </picker>
+            </view>
+          </view>
+        </block>
+        <mp-cell title="商品进价">
+          <input
+            class="weui-input"
+            placeholder="请输入商品进价/元"
+          />
+        </mp-cell>
+        <mp-cell title="商品售价">
+          <input
+            class="weui-input"
+            placeholder="请输入商品售价/元"
+          />
+        </mp-cell>
+        <mp-cell title="商品数量">
+          <input
+            class="weui-input"
+            placeholder="请输入商品数量/件"
+          />
+        </mp-cell>
+      </mp-cells>
+    </block>
+    <button class="product-add" bind:tap="bdAddProduct">+ 添加商品</button>
+    <button class="form-btn">提交</button>
   </mp-form>
   <mp-dialog
     show="{{showModal}}"

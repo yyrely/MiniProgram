@@ -1,11 +1,9 @@
-import { handleDate } from '../../utils/util.js'
 import { URL, Request, SuccRequest } from '../../utils/request.js'
 
 Page({
   /* Init data of Page */
   data: {
     pageNum: 1,
-    pageSize: 20,
     list: [],
     skuList: [],
     currentPage: 0,
@@ -121,6 +119,7 @@ Page({
             totalPages: data.totalPages,
             ...load
           })
+          wx.stopPullDownRefresh()
         }
       }
     })
@@ -152,10 +151,14 @@ Page({
   /* Pull-up Loading */
   onReachBottom: function () {
     let {pageNum, totalPages, loadMore} = this.data
-    if (loadMore && pageNum >= totalPages) return
-    that.setData({
+    if (pageNum >= totalPages) {
+      this.setData({ loadMore: false })    
+      return
+    }
+    if (loadMore) return
+    this.setData({
       loadMore: true,
-      pageNum: that.data.pageNum + 1
+      pageNum: this.data.pageNum + 1
     })
     this.loadStock({
       load: { loadMore: false }

@@ -28,6 +28,7 @@ Page({
             purcList: data.content,
             loading: false
           })
+          wx.stopPullDownRefresh()
         }
       }
     })

@@ -57,8 +57,6 @@
           <view class="sku-inline">商品库存：{{sku.skuStock}}</view>
         </view>
       </view>
-
-      
     </view>
   </view>
   <mp-dialog

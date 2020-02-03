@@ -1,4 +1,3 @@
-/* pages/modify/index.wxss */
 .main {
   padding: 5px;
 }
@@ -20,4 +19,26 @@ input:not(.input-text) {
   border-radius: 50%;
   font-weight: bold;
   font-size: 18px;
+}
+.product-box {
+  border-radius: 5px; }
+  .product-box .weui-cells,
+  .product-add {
+    margin: 20px 10px 0;
+    border-radius: 5px; }
+  .product-box .weui-cells {
+    border: 3px solid #ffe880; }
+  .product-box .weui-cells::before,
+  .product-box .weui-cells::after {
+    display: none;
+  }
+.product-add {
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  background-color: #ffe880;
+}
+.form-btn {
+  margin-top: 20px;
 }

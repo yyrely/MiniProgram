@@ -28,6 +28,7 @@ Page({
             saleList: data.content,
             loading: false
           })
+          wx.stopPullDownRefresh()
         }
       }
     })

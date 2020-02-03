@@ -58,6 +58,7 @@ Page({
             stokeInfo: data,
             stoLoad: false
           })
+          wx.stopPullDownRefresh()
         }
       }
     })

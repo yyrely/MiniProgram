@@ -9,6 +9,7 @@ Page({
     categoryObj: {},
     categoryId: null,
     attrs: [],
+    products: [{}],
     showModal: false,
     mdAttrId: null,
     mdAttrName: '',
@@ -17,13 +18,13 @@ Page({
   /* Event Listener */
   bdTypeChange: function (e) {
     let that = this
-    const {categoryObj} = this.data,
+    const {categoryObj} = that.data,
       index = e.detail.value
-    this.setData({
+    that.setData({
       categoryIndex: index
     })
     categoryObj.some((item) => {
-      if (item.categoryName == that.category[index]) {
+      if (item.categoryName == that.data.category[index]) {
         that.setData({
           categoryId: item.categoryId
         })
@@ -31,6 +32,16 @@ Page({
       }
     })
     that.getAttr(that.categoryId)
+  },
+  bdValueChange: function(e) {
+    let { attrs } = this.data
+    attrs = attrs.map((attr) => {
+      if (attr.attributeId == e.currentTarget.dataset.attrid) {
+        attr.valueIndex = e.detail.value
+      }
+      return attr
+    })
+    this.setData({ attrs })
   },
   bdOpenModal: function (e) {
     const { attrid, attrname } = e.currentTarget.dataset
@@ -46,6 +57,11 @@ Page({
     this.setData({
       addValue: value
     })    
+  },
+  bdAddProduct: function() {
+    let { products } = this.data
+    products.push({})
+    this.setData({ products })
   },
   bdModalBtn: function (e) {
     if (e.detail.index == 1) {
@@ -95,7 +111,10 @@ Page({
             item.valuePos.push({valueName: '+'})
             return item
           })
-          that.setData({ attrs })
+          that.setData({
+            attrs
+          })
+          console.log(data)
         }
       }
     })
