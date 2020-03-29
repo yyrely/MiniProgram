@@ -26,8 +26,17 @@
       <image class="block-icon" src="/images/stoke.svg" />
     </view>
     <view class="product-right">
-      <text>库存总额：{{stokeInfo.totalPrice || '0'}}</text>
+      <text>库存总额：{{stokeInfo.totalPrices || '0'}}</text>
       <text>库存总量：{{stokeInfo.totalNums || '0'}}</text>
+    </view>
+  </view>
+  <view class="card-box product-info">
+    <view class="product-left">
+      <image class="block-icon" src="/images/back.svg" />
+    </view>
+    <view class="product-right">
+      <text>退货总额：{{backInfo.totalPrices || '0'}}</text>
+      <text>退货总量：{{backInfo.totalNums || '0'}}</text>
     </view>
   </view>
 </view>

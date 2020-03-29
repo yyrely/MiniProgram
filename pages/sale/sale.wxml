@@ -2,18 +2,26 @@
 <!--index.wxml-->
 <view class="main container">
   <datepicker bind:datefresh="dateFresh" />
+  <mp-loading
+    show="{{loading}}"
+    type="dot-gray"
+    animated="true"
+    duration="{{900}}"
+  />
   <view
     wx:for="{{saleList}}"
     wx:for-item="info"
     wx:key="sellId"
+    data-sale="{{info.sellId}}"
+    bind:tap="bdSaleTap"
     class="card-box sale-box"
   >
-    <view class="">商品名称：{{info.productName}}</view>
-    <view class="">商品编号：{{info.productNo}}</view>
-    <view class="">销售数量：{{info.sellNums}}</view>
-    <view class="">销售价格：{{info.sellPrice}}</view>
-    <view class="">金额总计：{{info.sellTotal}}</view>
-    <view class="">
+    <view>商品名称：{{info.productName}}</view>
+    <view>商品编号：{{info.productNo}}</view>
+    <view>销售数量：{{info.sellNums}}</view>
+    <view>销售价格：{{info.sellPrice}}</view>
+    <view>金额总计：{{info.sellTotal}}</view>
+    <view>
       规格属性：
       <block
         wx:for="{{info.valueList}}"
@@ -23,5 +31,36 @@
         <text class="product-attr">{{attr.valueName}}</text>
       </block>
     </view>
+    <view
+      class="btn"
+      wx:if="{{info.sellId == rejectId}}"
+      data-num="{{info.sellNums}}"
+      bind:tap="bdRejectTap"
+    >退货</view>
   </view>
+  <view wx:if="{{ pageNum < totalpages }}">
+    <mp-loading
+      type="dot-gray"
+      show="{{loadMore}}"
+      animated="true"
+      duration="{{900}}"
+    />
+  </view>
+  <mp-dialog
+    title="客户退货"
+    show="{{showBack}}"
+    bind:buttontap="bdBackModBtn"
+    buttons="{{[{text: '取消'}, {text: '确认'}]}}">
+    <view class="input-row">
+      <label class="input-label">退货数量：</label>
+      <input
+        type="number"
+        value="{{backNums}}"
+        data-type="back.sellNums"
+        bind:input="bdInputChange"
+        placeholder="数量/件"
+        class="input-text"
+      />
+    </view>
+  </mp-dialog>
 </view>

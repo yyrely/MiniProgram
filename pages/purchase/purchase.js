@@ -5,28 +5,30 @@ import { URL, Request, SuccRequest } from '../../utils/request.js'
 Page({
   data: {
     pageNum: 1,
-    pageSize: 20,
+    totalPages: null,
     purcList: [],
-    date: handleDate(),
-    loading: true
+    dates: handleDate(),
+    loading: true,
+    loadMore: false
   },
-  pageLoad: function ({num=1, size=20} = {}) {
+  pageLoad: function ({load={}, type} = {}) {
     let that = this,
-        { date } = that.data
-    that.setData({
-      loading: true
-    })
-    const dates = date.split(' ~ '),
-      url = `${URL.purcList}?pageNum=${num}&pageSize=${size}` 
+        { dates, pageNum:num } = that.data
+    const url = `${URL.purcList}?pageNum=${num}&pageSize=10` 
             + `&startDate=${dates[0]}&endDate=${dates[1]}`
     Request({
       url,
       success: function (res) {
         const data = SuccRequest(res)
         if (data) {
+          let purcList = data.content
+          if (type == 'add') {
+            purcList = that.data.purcList.concat(data.content)
+          }
           that.setData({
-            purcList: data.content,
-            loading: false
+            purcList,
+            totalPages: data.totalPages,
+            ...load
           })
           wx.stopPullDownRefresh()
         }
@@ -35,18 +37,47 @@ Page({
   },
   /* Event Listeners */
   dateFresh: function (e) {
-    let { date } = e.detail
-    this.setData({ date })
-    this.pageLoad()
+    let { dates } = e.detail
+    this.setData({
+      dates,
+      pageNum: 1
+    })
+    this.pageLoad({
+      load: {loading: false}
+    })
   },
   /* LifeCycle--监听页面加载 */
   onShow: function () {
-    this.pageLoad()
+    this.pageLoad({
+      load: {loading: false}
+    })
   },
-  /* 下拉刷新 */
+  /* Pull-down Fresh */
   onPullDownRefresh: function() {
     const { loading } = this.data
     if (loading) return
-    this.pageLoad()
+    this.setData({
+      pageNum: 1
+    })
+    this.pageLoad({
+      load: {loading: false}
+    })
+  },
+  /* Pull-up Loading */
+  onReachBottom: function () {
+    let {pageNum, totalPages, loadMore} = this.data
+    if (pageNum >= totalPages) {
+      this.setData({ loadMore: false })    
+      return
+    }
+    if (loadMore) return
+    this.setData({
+      loadMore: true,
+      pageNum: this.data.pageNum + 1
+    })
+    this.pageLoad({
+      load: { loadMore: false },
+      type: 'add'
+    })
   }
 })

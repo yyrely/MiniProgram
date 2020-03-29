@@ -5,14 +5,21 @@ const domain = 'https://www.chuncongcong.com',
     salStatis: domain + '/api/sell/log/nums', /* 售货统计 */
     stoStatis: domain + '/api/sku/nums', /* 库存商品统计 */
     pucStatis: domain + '/api/purchase/log/nums', /* 进货统计 */
+    bacStatis: domain + '/api/return/log/nums', /* 退货统计 */
     purcList: domain + '/api/purchase/log/list', /* 进货列表 */
     saleList: domain + '/api/sell/log/list', /* 售货列表 */
+    backList: domain + '/api/return/log/list', /* 退货列表 */
     despList: domain + '/api/product/list', /* 库存列表 */
     skuList: domain + '/api/product/get/info/', /* 货品详情 */
     saleSku: domain + '/api/sku/sell', /* 售出商品 */
     category: domain + '/api/category/list', /* 分类列表 */
     attrValue: domain + '/api/attribute/value/get/', /* 规格及属性列表 */
-    addValue: domain + '/api/value/save' /* 增加属性值 */
+    addValue: domain + '/api/value/save', /* 增加属性值 */
+    addProduct: domain + '/api/product/add', /* 添加货品&商品 */
+    getProduct: domain + '/api/product/get/info/', /* 获取货品详细信息 */
+    modProduct: domain + '/api/product/update/sku', /* 修改货品信息 */
+    returnProd: domain + '/api/sell/log/returns/', /* 客户退货 */
+    returnFact: domain + '/api/sku/return', /* 退回厂家 */
   }
 
 function Request (obj) {

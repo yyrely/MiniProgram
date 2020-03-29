@@ -2,8 +2,19 @@
   display: none;
 }
 .datepicker {
+  display: flex;
+  margin-bottom: 15px; }
+  .datepicker > text {
+    padding: 0 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #9ae0ff;
+  }
+.date-start,
+.date-end {
+  flex: 1;
   position: relative;
-  margin-bottom: 15px;
+  z-index: 15;
 }
 .date-btn {
   display: block;
@@ -13,11 +24,16 @@
   font-weight: bold;
   color: #fff;
   border-radius: 5px;
-  background: #baf4ea;
+  background: #9ae0ff;
 }
+
 .calendar {
-  width: 100%;
-  background: #fff;
+  width: calc(100vw - 75rpx);
   box-shadow: 1px 1px 5px #eee;
-  position: absolute;
-}
+  background: #fff;
+  position: absolute; }
+  .date-start .calendar {
+    left: 0; }
+  .date-end .calendar {
+    right: 0;
+  }

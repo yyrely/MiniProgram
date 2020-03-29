@@ -1,5 +1,15 @@
 /* pages/location/location.wxss */
+/* Buttons */
+.add,
+.goods-btn {
+  text-align: center;
+  color: #fff;
+  background: #87daff;
+  border-radius: 5px;
+}
+
 .add-search {
+  display: flex;
   margin-bottom: 10px;
 }
 .add {
@@ -7,13 +17,12 @@
   margin-right: 10px; }
   .add navigator {
     padding: 0 10px;
-    font-size: 25px;
+    line-height: 1.4;
+    font-size: 24px;
     font-weight: bold;
-    color: #fff;
-    background-color: #87daff;
-    border-radius: 5px;
   }
 .add-search .search {
+  width: calc(100vw - 87px);
   padding: 0;
   background: inherit; }
   .search .weui-search-bar__form {
@@ -47,23 +56,33 @@
 }
 
 .sku-item {
-  padding: 10px 10rpx;
-  border-top: 1px solid #eee; }
+  padding: 10px 50px 10px 10rpx;
+  border-top: 1px solid #eee;
+  position: relative; }
   .sku-item:first-child {
-    border-top: none;
-  }
+    border-top: none; }
+  .sku-item .btn {
+    padding: 0 5px;
+    font-size: 15px;
+    border-radius: 5px;
+    position: absolute;
+    right: 0; }
+  .sku-item .sell-btn {
+    top: 10px; }
+  .sku-item .back-btn {
+    top: 50px; }
 
 .card-box .goods-btn {
   display: none;
   width: 65px;
-  padding: 5px;
   line-height: 1;
   font-size: 15px;
-  border-radius: 5px;
   position: absolute;
   right: 20rpx;
-  bottom: 10px;
-}
+  bottom: 10px; }
+  .goods-btn navigator {
+    padding: 5px;
+  }
 .card-box.show .goods-btn {
   display: block;
 }

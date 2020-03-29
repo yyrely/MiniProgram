@@ -1,0 +1,31 @@
+<view class="main container">
+  <datepicker bind:datefresh="dateFresh" />
+  <mp-loading
+    show="{{loading}}"
+    type="dot-gray"
+    animated="true"
+    duration="{{900}}"
+  />
+  <view
+    wx:for="{{backList}}"
+    wx:for-item="info"
+    wx:key="returnId"
+    class="card-box back-box"
+  >
+    <view>商品名称：{{info.productName}}</view>
+    <view>商品编号：{{info.productNo}}</view>
+    <view>退货数量：{{info.returnNums}}</view>
+    <view>金额总计：￥{{info.totalPrice}}</view>
+    <view>退货时间：￥{{info.returnDate}}</view>
+    <view>
+      规格属性：
+      <block
+        wx:for="{{info.valueList}}"
+        wx:for-item="attr"
+        wx:key="valueId"
+      >
+        <text class="product-attr">{{attr.valueName}}</text>
+      </block>
+    </view>
+  </view>
+</view>

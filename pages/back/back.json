@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "退货单",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "datepicker": "/components/datepicker/datepicker"
+  }
+}

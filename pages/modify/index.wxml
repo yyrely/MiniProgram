@@ -5,12 +5,20 @@
         <input
           class="weui-input"
           placeholder="请输入货品编号"
+          disabled="{{isModify}}"
+          value="{{goods.productNo}}"
+          data-type="productNo"
+          bind:input="bdGoodsInput"
         />
       </mp-cell>
       <mp-cell title="货品名称">
         <input
           class="weui-input"
           placeholder="请输入货品名称"
+          disabled="{{isModify}}"
+          value="{{goods.productName}}"
+          data-type="productName"
+          bind:input="bdGoodsInput"
         />
       </mp-cell>
       <view class="weui-cell weui-cell_select">
@@ -20,6 +28,7 @@
         <view class="weui-cell__bd">
           <picker
             bind:change="bdTypeChange"
+            disabled="{{isModify}}"
             value="{{categoryIndex}}"
             range="{{category}}">
             <view
@@ -33,7 +42,7 @@
         wx:for-item="attr"
         wx:key="attributeId">
         <mp-cell title="{{attr.attributeName}}">
-          <view
+          <view 
             wx:for="{{attr.valuePos}}"
             wx:for-item="value"
             wx:key="valueId"
@@ -46,10 +55,16 @@
       </block>
     </mp-cells>
     <block
-      wx:for="{{products}}"
-      wx:for-item="product"
-      wx:key="product">
+      wx:for="{{orders}}"
+      wx:for-item="order"
+      wx:key="order">
       <mp-cells ext-class="product-box">
+        <view
+          class="close"
+          wx:if="{{!products[order].skuId && orders.length > 1}}"
+          bind:tap="bdClose"
+          data-order="{{order}}"
+        ><text></text></view>
         <block
           wx:for="{{attrs}}"
           wx:for-item="attr"
@@ -62,10 +77,11 @@
               <picker
                 bind:change="bdValueChange"
                 data-attrid="{{attr.attributeId}}"
-                value="{{attr.valueIndex}}"
+                data-order="{{order}}"
+                value="{{valueKeys[order][attr.attributeId]}}"
                 range="{{attr.valueNames}}">
                 <view class="weui-select weui-select_in-select-after"
-                >{{attr.valueNames[attr.valueIndex]}}</view>
+                >{{attr.valueNames[valueKeys[order][attr.attributeId]]}}</view>
               </picker>
             </view>
           </view>
@@ -74,24 +90,39 @@
           <input
             class="weui-input"
             placeholder="请输入商品进价/元"
+            type="digit"
+            data-type="skuInPrice"
+            value="{{products[order].skuInPrice}}"
+            data-order="{{order}}"
+            bind:input="bdValueInput"
           />
         </mp-cell>
         <mp-cell title="商品售价">
           <input
             class="weui-input"
+            type="digit"
             placeholder="请输入商品售价/元"
+            data-type="skuOutPrice"
+            value="{{products[order].skuOutPrice}}"
+            data-order="{{order}}"
+            bind:input="bdValueInput"
           />
         </mp-cell>
         <mp-cell title="商品数量">
           <input
             class="weui-input"
             placeholder="请输入商品数量/件"
+            type="number"
+            data-type="skuStock"
+            value="{{products[order].skuStock}}"
+            data-order="{{order}}"
+            bind:input="bdValueInput"
           />
         </mp-cell>
       </mp-cells>
     </block>
     <button class="product-add" bind:tap="bdAddProduct">+ 添加商品</button>
-    <button class="form-btn">提交</button>
+    <button class="form-btn" bind:tap="bdSubmit">提交</button>
   </mp-form>
   <mp-dialog
     show="{{showModal}}"
@@ -101,9 +132,9 @@
     <view class="flex-row">
       <label class="input-label">{{mdAttrName}}：</label>
       <input
-        type="digit"
-        bind:blur="bdInputAttr"
+        bind:input="bdInputAttr"
         placeholder="请输入新增内容"
+        value="{{value}}"
         class="input-text"
       />
     </view>

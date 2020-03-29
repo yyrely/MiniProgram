@@ -7,24 +7,26 @@ Page({
     saleInfo: {},
     purcInfo: {},
     stokeInfo: {},
+    backInfo: {},
     salLoad: true,
     pucLoad: true,
     stoLoad: true,
-    date: handleDate()
+    bacLoad: true,
+    dates: handleDate()
   },
   pageLoad: function () {
     let that = this,
-      { date } = this.data,
-      { salStatis, pucStatis, stoStatis } = URL
+      { dates } = this.data,
+      { salStatis, pucStatis, stoStatis, bacStatis } = URL
     that.setData({
       salLoad: true,
       pucLoad: true,
-      stoLoad: true
+      stoLoad: true,
+      bacLoad: true
     })
-    const dates = date.split(' ~ ')
     salStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
     pucStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
-    stoStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
+    bacStatis += `?startDate=${dates[0]}&endDate=${dates[1]}`
     Request({
       url: salStatis,
       success: function (res) {
@@ -62,11 +64,24 @@ Page({
         }
       }
     })
+    Request({
+      url: bacStatis,
+      success: function (res) {
+        const data = SuccRequest(res)
+        if (data) {
+          that.setData({
+            backInfo: data,
+            bacLoad: false
+          })
+          wx.stopPullDownRefresh()
+        }
+      }
+    })
   },
   /* Event Listeners */
   dateFresh: function (e) {
-    let { date } = e.detail
-    this.setData({ date })
+    let { dates } = e.detail
+    this.setData({ dates })
     this.pageLoad()
   },
   /* LifeCycle-监听页面显示 */
@@ -75,8 +90,8 @@ Page({
   },
   /* 下拉刷新 */
   onPullDownRefresh: function() {
-    const { salLoad, pucLoad, stoLoad } = this.data
-    if (salLoad || pucLoad || stoLoad) return
+    const { salLoad, pucLoad, stoLoad, bacLoad } = this.data
+    if (salLoad || pucLoad || stoLoad || bacLoad) return
     this.pageLoad()
   }
 })

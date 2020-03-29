@@ -6,6 +6,33 @@ input:not(.input-text) {
   padding-bottom: 0;
   border: none;
 }
+.close {
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  position: absolute;
+  top: -23px;
+  right: -4px;
+  z-index: 1; }
+  .close > text {
+    display: block;
+    width: 100%;
+    height: 100%; }
+  .close > text::before,
+  .close > text::after {
+    content: ' ';
+    display: block;
+    width: 3px;
+    height: 100%;
+    background: #80e4ff;
+    border-radius: 1px;
+    position: absolute;
+    left: 45%; }
+  .close > text::before {
+    transform: rotate(45deg); }
+  .close > text::after {
+    transform: rotate(-45deg); }
+
 .flex-row {
   align-items: center;
 }
@@ -21,13 +48,14 @@ input:not(.input-text) {
   font-size: 18px;
 }
 .product-box {
-  border-radius: 5px; }
+  border-radius: 5px;
+  margin-bottom: 5px; }
   .product-box .weui-cells,
   .product-add {
-    margin: 20px 10px 0;
+    margin: 30px 10px 0;
     border-radius: 5px; }
   .product-box .weui-cells {
-    border: 3px solid #ffe880; }
+    border: 3px solid #80e4ff; }
   .product-box .weui-cells::before,
   .product-box .weui-cells::after {
     display: none;

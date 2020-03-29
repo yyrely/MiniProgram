@@ -4,7 +4,8 @@
 view, button {
   box-sizing: border-box;
 }
-button {
+button,
+.btn {
   min-height: 0;
   color: #fff;
   background: #87daff;

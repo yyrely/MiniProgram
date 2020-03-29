@@ -127,6 +127,7 @@ Component({
       } else {
         whenSingleSelect.call(this, idx);
       }
+      this.triggerEvent('dayPick')
     },
     doubleClickToToday() {
       if (this.config.multi || this.weekMode) return;

@@ -1,10 +1,30 @@
 <!--components/datepicker/datepicker.wxml-->
 <view class="datepicker">
-  <view class="date-btn" bind:tap="toggleCalendar">
-    {{chooseDate}}
+  <view class="date-start">
+    <view
+      class="date-btn"
+      data-type="start"
+      bind:tap="bdDateTap"
+    >{{start}}</view>
+    <calendar
+      class="calendar {{starthide && 'hide'}}"
+      calendarConfig="{{calendarConfig}}"
+      data-type="start"
+      bind:dayPick="bdDayPick"
+    ></calendar>
   </view>
-  <calendar
-    class="calendar {{hide && 'hide'}}"
-    calendarConfig="{{calendarConfig}}"
-  ></calendar>
+  <text>~</text>
+  <view class="date-end">
+    <view
+      class="date-btn"
+      data-type="end"
+      bind:tap="bdDateTap"
+    >{{end}}</view>
+    <calendar
+      class="calendar {{endhide && 'hide'}}"
+      calendarConfig="{{calendarConfig}}"
+      data-type="end"
+      bind:dayPick="bdDayPick"
+    ></calendar>
+  </view>
 </view>

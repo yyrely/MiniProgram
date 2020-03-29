@@ -28,7 +28,9 @@
       <view class="goods-num">货号：<text>{{item.productNo}}</text></view>
       <view class="goods-name">货品名称：{{item.productName}}</view>
       <view>货品描述：<text>{{item.productDesc || '暂无描述'}}</text></view>
-      <button class="goods-btn">修改</button>
+      <view class="goods-btn">
+        <navigator url="../modify/index?prodid={{item.productId}}">修改</navigator>
+      </view>
     </view>
     <view class="sku-list" wx:if="{{showNum === item.productId}}">
       <mp-loading
@@ -44,7 +46,6 @@
           wx:for="{{skuList}}"
           wx:for-item="sku"
           wx:key="skuId"
-          data-skuid="{{sku.skuId}}"
           bind:longpress="longPressSku"
           class="sku-item">
           <block wx:for="{{sku.valueList}}" wx:for-item="value" wx:key="valueId">
@@ -55,6 +56,17 @@
             <view class="sku-inline">商品售价：<text>￥</text>{{sku.skuOutPrice}}</view>
           </view>
           <view class="sku-inline">商品库存：{{sku.skuStock}}</view>
+          <view
+            class="btn sell-btn"
+            data-skuid="{{sku.skuId}}"
+            bind:tap="bdSellTap"
+          >出售</view>
+          <view
+            class="btn back-btn"
+            data-skuid="{{sku.skuId}}"
+            data-prodid="{{item.productId}}"
+            bind:tap="bdBackTap"
+          >退货</view>
         </view>
       </view>
     </view>
@@ -69,7 +81,8 @@
       <input
         type="digit"
         value="{{sale.price}}"
-        bind:input="changePrice"
+        data-type="sale.price"
+        bind:input="bdInputChange"
         placeholder="售价/元"
         class="input-text"
       />
@@ -79,17 +92,36 @@
       <input
         type="number"
         value="{{sale.number}}"
-        bind:input="changeNumber"
+        data-type="sale.number"
+        bind:input="bdInputChange"
         placeholder="数量/件"
         class="input-text"
       />
     </view>
   </mp-dialog>
-  <mp-loading
-    type="dot-gray"
-    show="{{loadMore}}"
-    animated="true"
-    duration="{{900}}"
-  />
-  <view wx:if="{{ pageNum >= totalpages }}"></view>
+  <mp-dialog
+    title="商品退回厂家"
+    show="{{showBack}}"
+    bind:buttontap="bdBackModBtn"
+    buttons="{{[{text: '取消'}, {text: '确认'}]}}">
+    <view class="input-row">
+      <label class="input-label">销售数量：</label>
+      <input
+        type="number"
+        value="{{back.sellNums}}"
+        data-type="back.sellNums"
+        bind:input="bdInputChange"
+        placeholder="数量/件"
+        class="input-text"
+      />
+    </view>
+  </mp-dialog>
+  <view wx:if="{{ pageNum < totalpages }}">
+    <mp-loading
+      type="dot-gray"
+      show="{{loadMore}}"
+      animated="true"
+      duration="{{900}}"
+    />
+  </view>
 </view>

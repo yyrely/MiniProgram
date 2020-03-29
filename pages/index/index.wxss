@@ -18,7 +18,7 @@
 .product-right {
   flex: 1;
   padding: 10px 20px;
-  border-left: 2px solid #baf4ea;
+  border-left: 2px solid #87daff;
   overflow: hidden;
 }
 .product-right text {

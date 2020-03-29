@@ -1,18 +1,19 @@
 {
   "pages": [
-    "pages/modify/index",
     "pages/index/index",
     "pages/purchase/purchase",
     "pages/sale/sale",
+    "pages/back/back",
     "pages/depository/depository",
+    "pages/modify/index",
     "pages/login/login"
   ],
   "window": {
     "backgroundColor": "#fffef6",
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#baf4ea",
+    "navigationBarBackgroundColor": "#9ae0ff",
     "navigationBarTitleText": "商品管理中心",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "selectedColor": "#87daff",
@@ -35,6 +36,12 @@
         "text": "售货单",
         "iconPath": "/images/sale_icon.png",
         "selectedIconPath": "/images/sale_select.png"
+      },
+      {
+        "pagePath": "pages/back/back",
+        "text": "退货单",
+        "iconPath": "/images/back_icon.png",
+        "selectedIconPath": "/images/back_select.png"
       },
       {
         "pagePath": "pages/depository/depository",

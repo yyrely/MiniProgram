@@ -1,6 +1,9 @@
 {
+  "navigationBarTitleText": "售货单",
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "datepicker": "/components/datepicker/datepicker"
+    "datepicker": "/components/datepicker/datepicker",
+    "mp-loading": "/components/weui/loading/loading",
+    "mp-dialog": "/components/weui/dialog/dialog"
   }
 }

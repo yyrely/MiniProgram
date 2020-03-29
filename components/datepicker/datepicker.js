@@ -1,6 +1,8 @@
 // components/datepicker/datepicker.js
 import { getSelectedDay } from '../calendar/main.js'
+import { judgeDate } from '../../utils/util'
 
+let today = handleDate()
 let date = handleDate() + ' ~ ' + handleDate()
 function handleDate ({...date}) {
   if (!date.year) {
@@ -27,34 +29,70 @@ Component({
   },
   /* Init data */
   data: {
+    start: today,
+    end: today,
+    starthide: true,
+    endhide: true,
     chooseDate: date,
     hide: true,
     calendarConfig: {
       theme: 'default', // 设置主题
       defaultDay: true, // 默认选中当天
-      chooseAreaMode: true, // 开启范围选择
       highlightToday: true, // 高亮显示当天
       disableLaterDay: true // 禁选当天之后的日期
     }
   },
   /* Function List */
   methods: {
-    toggleCalendar: function (e) {
-      let {hide} = this.data
+    // EventListener => click 'date button'
+    bdDateTap(e) {
+      const { type } = e.currentTarget.dataset
+      if (type == 'start') {
+        this.setData({
+          endhide: true
+        })
+      } else if (type == 'end') {
+        this.setData({
+          starthide: true
+        })
+      }
+      const hide = type + 'hide'
       this.setData({
-        hide: !hide
+        [hide]: !this.data[hide]
       })
-      if (!hide) {
-        const dates = getSelectedDay()
-        if (getSelectedDay().length > 0) {
-          let begin = handleDate(dates[0]),
-            end = handleDate(dates[dates.length - 1])
-          date = begin + ' ~ ' + end
+    },
+    // Choose Day.
+    bdDayPick(e) {
+      const { type } = e.currentTarget.dataset
+      const hide = type + 'hide'
+      if (getSelectedDay().length > 0) {
+        let judge = true
+        if (type == 'start') {
+          judge = judgeDate({
+            start: getSelectedDay()[0],
+            end: this.data.end
+          })
+        } else if (type == 'end') {
+          judge = judgeDate({
+            start: this.data.start,
+            end: getSelectedDay()[0]
+          })
+        }
+        if (!judge) {
+          wx.showToast({
+            title: '开始日期不可大于结束日期',
+            icon: 'none',
+            duration: 1500
+          })
+          return
         }
         this.setData({
-          chooseDate: date
+          [hide]: true,
+          [type]: handleDate(getSelectedDay()[0])
         })
-        this.triggerEvent('datefresh', {date: date})
+        this.triggerEvent('datefresh', {
+          dates: [this.data.start, this.data.end]
+        })
       }
     }
   }

@@ -1,6 +1,12 @@
 <!--pages/purchase/purchase.wxml-->
 <view class="main container">
   <datepicker bind:datefresh="dateFresh" />
+  <mp-loading
+    show="{{loading}}"
+    type="dot-gray"
+    animated="true"
+    duration="{{900}}"
+  />
   <view
     wx:for="{{purcList}}"
     wx:for-item="info"
@@ -22,5 +28,13 @@
         <text class="product-attr">{{attr.valueName}}</text>
       </block>
     </view>
+  </view>
+  <view wx:if="{{ pageNum < totalpages }}">
+    <mp-loading
+      type="dot-gray"
+      show="{{loadMore}}"
+      animated="true"
+      duration="{{900}}"
+    />
   </view>
 </view>

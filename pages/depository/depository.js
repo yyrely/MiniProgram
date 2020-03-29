@@ -7,13 +7,18 @@ Page({
     list: [],
     skuList: [],
     currentPage: 0,
-    totalPages: 0,
+    totalPages: null,
     showNum: null,
     loading: true,
     loadSku: false,
     loadMore: false,
     skuId: null,
+    back: {
+      skuId: null,
+      sellNums: ''
+    },
     showModal: false,
+    showBack: false,
     sale: {
       price: '',
       number: ''
@@ -21,31 +26,19 @@ Page({
   },
   // Toggle Goods Click Event
   toggleGoods: function (e) {
-    let productId = e.currentTarget.dataset.id,
-        that = this
+    let productId = e.currentTarget.dataset.id
     if (productId === this.data.showNum) {
       productId = null
     }
-    that.setData({
+    this.setData({
       skuList: [],
       showNum: productId,
       loadSku: productId ? true : false
     })
-    productId != null &&
-      Request({
-        url: URL.skuList + String(productId),
-        success: function (res) {
-          var data = SuccRequest(res)
-          if (data) {
-            that.setData({
-              skuList: data.skuList,
-              loadSku: !that.data.loadSku
-            })
-          }
-        }
-      })
+    productId != null
+      && this.loadProd(productId)
   },
-  longPressSku: function (e) {
+  bdSellTap: function (e) {
     this.setData({
       skuId: e.currentTarget.dataset.skuid,
       showModal: true,
@@ -55,15 +48,18 @@ Page({
       }
     })
   },
-  // Input value listener
-  changePrice: function (e) {
+  bdBackTap(e) {
     this.setData({
-      ["sale.price"]: e.detail.value
+      ["back.skuId"]: e.currentTarget.dataset.skuid,
+      ["back.productId"]: e.currentTarget.dataset.prodid,
+      showBack: true
     })
   },
-  changeNumber: function (e) {
+  // Input value listener
+  bdInputChange(e) {
+    const { type } = e.currentTarget.dataset
     this.setData({
-      ["sale.number"]: e.detail.value
+      [type]: e.detail.value
     })
   },
   // Modal button
@@ -84,8 +80,11 @@ Page({
           var data = SuccRequest(res)
           if (data) {
             wx.showToast({
-              title: '出售成功',
-              duration: 1000
+              title: '操作成功',
+              duration: 1500,
+              complete() {
+                that.loadProd(showNum)
+              }
             })
           } 
         }
@@ -98,11 +97,66 @@ Page({
       ["sale.number"]: ''
     })
   },
+  bdBackModBtn(e) {
+    const that = this
+    const { showNum, back } = that.data
+    if (e.detail.index == 1) {
+      if (!back.sellNums || back.sellNums=='') {
+        wx.showModal({
+          title: '退货数量不能为空',
+          duration: 1500
+        })
+        return
+      }
+      Request({
+        url: URL.returnFact,
+        method: "post",
+        data: {
+          productId: showNum,
+          ...back
+        },
+        success: function (res) {
+          var data = SuccRequest(res)
+          if (data) {
+            wx.showToast({
+              title: '操作成功',
+              duration: 1500,
+              complete() {
+                that.loadProd(showNum)
+              }
+            })
+          }
+        }
+      })
+    }
+    that.setData({
+      showBack: false,
+      back: {
+        skuId: null,
+        sellNums: ''
+      }
+    })
+  },
+  loadProd(productId) {
+    const that = this
+    Request({
+      url: URL.skuList + String(productId),
+      success: function (res) {
+        var data = SuccRequest(res)
+        if (data) {
+          that.setData({
+            skuList: data.skuList,
+            loadSku: !that.data.loadSku
+          })
+        }
+      }
+    })
+  },
   // Load Stock
-  loadStock: function ({load={}, number} = {}) {
+  loadStock: function ({load={}, number, type} = {}) {
     let that = this,
       num = that.data.pageNum,
-      url = `${URL.despList}?pageNum=${num}&pageSize=20`
+      url = `${URL.despList}?pageNum=${num}&pageSize=10`
     if (number && number != '') {
       url += '&productNo=' + number
       num = 1
@@ -112,7 +166,12 @@ Page({
       success: function (res) {
         var data = SuccRequest(res)
         if (data) {
-          let list = that.data.list.concat(data.content)
+          let list
+          if (type == 'add') {
+            list = that.data.list.concat(data.content)
+          } else {
+            list = data.content
+          }
           that.setData({
             list,
             currentPage: data.pageNum,
@@ -125,7 +184,7 @@ Page({
     })
   },
   /* LifeCycle-监听页面加载 */
-  onLoad: function (options) {
+  onShow: function (options) {
     this.loadStock({
       load: { loading: false }
     })
@@ -140,7 +199,7 @@ Page({
       number: e.detail.value
     })
   },
-  /* 下拉刷新 */
+  /* Pull-down Fresh */
   onPullDownRefresh: function () {
     const { loading } = this.data
     if (loading) return
@@ -161,7 +220,8 @@ Page({
       pageNum: this.data.pageNum + 1
     })
     this.loadStock({
-      load: { loadMore: false }
+      load: { loadMore: false },
+      type: 'add'
     })
   }
 })
