@@ -1,6 +1,8 @@
 import { handleDate } from '../../utils/util.js'
 import { URL, Request, SuccRequest } from '../../utils/request.js'
 
+const today = handleDate()
+
 Page({
   /* Init data of page */
   data: {
@@ -12,7 +14,7 @@ Page({
     backNums: '',
     loading: true,
     loadMore: false,
-    dates: handleDate()
+    dates: [today, today]
   },
   bdSaleTap(e) {
     this.setData({

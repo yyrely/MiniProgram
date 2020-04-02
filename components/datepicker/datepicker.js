@@ -1,26 +1,8 @@
 // components/datepicker/datepicker.js
 import { getSelectedDay } from '../calendar/main.js'
-import { judgeDate } from '../../utils/util'
+import { judgeDate, handleDate } from '../../utils/util'
 
 let today = handleDate()
-let date = handleDate() + ' ~ ' + handleDate()
-function handleDate ({...date}) {
-  if (!date.year) {
-    var date = new Date()
-    date = {
-      year: date.getFullYear(),
-      month: date.getMonth() + 1,
-      day: date.getDate()
-    }
-  }
-  if (typeof date.month == 'number' && date.month < 10) {
-    date.month = `0${date.month}`
-  }
-  if (typeof date.day == 'number' && date.day < 10) {
-    (date.day = `0${date.day}`)
-  }
-  return `${date.year}-${date.month}-${date.day}`
-}
 
 Component({
   /* Properties */
@@ -33,7 +15,6 @@ Component({
     end: today,
     starthide: true,
     endhide: true,
-    chooseDate: date,
     hide: true,
     calendarConfig: {
       theme: 'default', // 设置主题
@@ -67,15 +48,16 @@ Component({
       const hide = type + 'hide'
       if (getSelectedDay().length > 0) {
         let judge = true
+        let newDay = handleDate(getSelectedDay()[0])
         if (type == 'start') {
           judge = judgeDate({
-            start: getSelectedDay()[0],
+            start: newDay,
             end: this.data.end
           })
         } else if (type == 'end') {
           judge = judgeDate({
             start: this.data.start,
-            end: getSelectedDay()[0]
+            end: newDay
           })
         }
         if (!judge) {
@@ -88,7 +70,7 @@ Component({
         }
         this.setData({
           [hide]: true,
-          [type]: handleDate(getSelectedDay()[0])
+          [type]: newDay
         })
         this.triggerEvent('datefresh', {
           dates: [this.data.start, this.data.end]

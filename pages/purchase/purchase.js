@@ -1,13 +1,14 @@
 import { handleDate } from '../../utils/util.js'
 import { URL, Request, SuccRequest } from '../../utils/request.js'
 
+const today = handleDate()
 
 Page({
   data: {
     pageNum: 1,
     totalPages: null,
     purcList: [],
-    dates: handleDate(),
+    dates: [today, today],
     loading: true,
     loadMore: false
   },

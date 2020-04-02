@@ -5,6 +5,7 @@ Page({
   /* Init data of page */
   data: {
     isModify: false,
+    isSubmit: false,
     prodId: null,
     value: '',
     category: [],
@@ -131,8 +132,10 @@ Page({
     this.setData({ orders, valueKeys, products })
   },
   bdSubmit: function() {
-    if (!this.formValidate()) return
-    const { data } = this
+    const that = this
+    if (that.data.isSubmit) return
+    if (!that.formValidate()) return
+    const { data } = that
     let text = '添加成功',
         url = URL.addProduct,
         info = {
@@ -144,6 +147,9 @@ Page({
       url = URL.modProduct
       info.productId = data.prodId
     }
+    that.setData({
+      isSubmit: true
+    })
     Request({
       url,
       method: 'post',
@@ -152,6 +158,9 @@ Page({
       },
       success: function(res) {
         const resData = SuccRequest(res)
+        that.setData({
+          isSubmit: false
+        })
         if (resData) {
           wx.showToast({
             title: text,

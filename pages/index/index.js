@@ -1,6 +1,8 @@
 import { handleDate } from '../../utils/util.js'
 import { URL, Request, SuccRequest } from '../../utils/request.js'
 
+const today = handleDate()
+
 Page({
   /* Init data of Page */
   data: {
@@ -12,7 +14,7 @@ Page({
     pucLoad: true,
     stoLoad: true,
     bacLoad: true,
-    dates: handleDate()
+    dates: [today, today]
   },
   pageLoad: function () {
     let that = this,
