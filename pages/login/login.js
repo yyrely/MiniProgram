@@ -1,5 +1,7 @@
 import { URL, Request, SuccRequest } from '../../utils/request.js'
 
+let app = getApp()
+
 Page({
   /* Init data of page */
   data: {
@@ -42,11 +44,16 @@ Page({
       success: function (res) {
         const data = SuccRequest(res)
         if (data) {
+          const roles = data.roles
           wx.showToast({
             title: '登录成功！',
             duration: 2000,
             complete: function () {
+              if (roles.indexOf('ROLE_ADMIN') !== -1) {
+                app.globalData.admin = true
+              }
               wx.setStorageSync('token', data.token)
+              wx.setStorageSync('roles', roles)
               wx.switchTab({ url: '/pages/index/index' })
             }
           })

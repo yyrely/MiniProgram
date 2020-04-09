@@ -1,8 +1,11 @@
 import { URL, Request, SuccRequest } from '../../utils/request.js'
 
+const globalData = getApp().globalData
+
 Page({
   /* Init data of Page */
   data: {
+    admin: globalData.admin,
     pageNum: 1,
     list: [],
     skuList: [],
@@ -185,6 +188,9 @@ Page({
   },
   /* LifeCycle-监听页面加载 */
   onShow: function (options) {
+    this.setData({
+      admin: globalData.admin
+    })
     this.loadStock({
       load: { loading: false }
     })

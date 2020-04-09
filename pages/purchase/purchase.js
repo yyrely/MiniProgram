@@ -2,9 +2,11 @@ import { handleDate } from '../../utils/util.js'
 import { URL, Request, SuccRequest } from '../../utils/request.js'
 
 const today = handleDate()
+const globalData = getApp().globalData
 
 Page({
   data: {
+    admin: globalData.admin,
     pageNum: 1,
     totalPages: null,
     purcList: [],
@@ -49,6 +51,9 @@ Page({
   },
   /* LifeCycle--监听页面加载 */
   onShow: function () {
+    this.setData({
+      admin: globalData.admin
+    })
     this.pageLoad({
       load: {loading: false}
     })

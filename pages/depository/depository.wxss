@@ -9,9 +9,10 @@
 }
 
 .add-search {
-  display: flex;
-  margin-bottom: 10px;
-}
+  margin-bottom: 10px; }
+  .add-search.admin {
+    display: flex;    
+  }
 .add {
   display: inline-block;
   margin-right: 10px; }
@@ -22,9 +23,10 @@
     font-weight: bold;
   }
 .add-search .search {
-  width: calc(100vw - 87px);
   padding: 0;
   background: inherit; }
+  .add-search.admin .search {
+    width: calc(100vw - 87px); }
   .search .weui-search-bar__form {
     border: 1px solid #eee;
   }

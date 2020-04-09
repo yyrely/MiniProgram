@@ -1,5 +1,13 @@
 <!--pages/purchase/purchase.wxml-->
-<view class="main container">
+<view
+  class="main container access"
+  wx:if="{{!admin}}">
+  <text>！暂无权限</text>
+</view>
+<view
+  class="main container"
+  wx:if="{{admin}}"
+>
   <datepicker bind:datefresh="dateFresh" />
   <mp-loading
     show="{{loading}}"

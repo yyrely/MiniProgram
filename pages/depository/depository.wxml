@@ -1,7 +1,10 @@
 <!--pages/location/location.wxml-->
 <view class="main container">  
-  <view class="add-search">
-    <view class="add">
+  <view class="add-search {{admin ? 'admin' : ''}}">
+    <view
+      class="add"
+      wx:if="{{admin}}"
+    >
       <navigator url="../modify/index">+</navigator>
     </view>
     <mp-searchbar
@@ -28,7 +31,7 @@
       <view class="goods-num">货号：<text>{{item.productNo}}</text></view>
       <view class="goods-name">货品名称：{{item.productName}}</view>
       <view>货品描述：<text>{{item.productDesc || '暂无描述'}}</text></view>
-      <view class="goods-btn">
+      <view class="goods-btn" wx:if="{{admin}}">
         <navigator url="../modify/index?prodid={{item.productId}}">修改</navigator>
       </view>
     </view>
@@ -52,7 +55,7 @@
             <text class="sku-inline sku-attribute">{{value.attributeName}}：{{value.valueName}}</text>
           </block>
           <view>
-            <view class="sku-inline">商品进价：<text>￥</text>{{sku.skuInPrice}}</view>
+            <view class="sku-inline" wx:if="{{admin}}">商品进价：<text>￥</text>{{sku.skuInPrice}}</view>
             <view class="sku-inline">商品售价：<text>￥</text>{{sku.skuOutPrice}}</view>
           </view>
           <view class="sku-inline">商品库存：{{sku.skuStock}}</view>
