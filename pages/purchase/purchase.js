@@ -60,8 +60,8 @@ Page({
   },
   /* Pull-down Fresh */
   onPullDownRefresh: function() {
-    const { loading } = this.data
-    if (loading) return
+    const { admin, loading } = this.data
+    if (!admin || loading) return
     this.setData({
       pageNum: 1
     })

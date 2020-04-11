@@ -9,7 +9,7 @@ Page({
     prodId: null,
     value: '',
     category: [],
-    categoryIndex: null,
+    categoryIndex: 0,
     categoryObj: {},
     attrs: [],
     orders: [ 0 ],
@@ -211,7 +211,7 @@ Page({
     })
   },
   formValidate: function () {
-    let { goods, products, attrs } = this.data
+    let { category, categoryIndex, goods, products, attrs } = this.data
     if (!goods.productNo || goods.productNo == '') {
       modal('货品编号不能为空')
       return false
@@ -219,8 +219,13 @@ Page({
       modal('货品名称不能为空')
       return false
     } if (!goods.categoryId) {
-      modal('请选择货品类别')
-      return false
+      if (!category[categoryIndex]) {
+        this.setData({
+          [goods.category]: category[categoryIndex]
+        })
+      } else {
+        return false
+      }
     }
     let vali = true
     for (var product of products) {
