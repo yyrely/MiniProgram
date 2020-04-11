@@ -224,6 +224,7 @@ Page({
           [goods.category]: category[categoryIndex]
         })
       } else {
+        modal('请选择货品类别')
         return false
       }
     }
