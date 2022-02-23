@@ -188,12 +188,14 @@ Page({
   },
   /* LifeCycle-监听页面加载 */
   onShow: function (options) {
-    this.setData({
-      admin: globalData.admin
-    })
-    this.loadStock({
-      load: { loading: false }
-    })
+    if (this.data.pageNum === 1) {
+      this.setData({
+        admin: globalData.admin
+      })
+      this.loadStock({
+        load: { loading: false }
+      })
+    }
   },
   bdSearchConfirm: function(e) {
     this.setData({

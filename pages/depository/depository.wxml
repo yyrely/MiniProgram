@@ -28,6 +28,7 @@
       bind:tap="toggleGoods"
       data-id="{{item.productId}}"
       class="goods-box">
+      <view class="goods-category">{{item.categoryName}}</view>
       <view class="goods-num">货号：<text>{{item.productNo}}</text></view>
       <view class="goods-name">货品名称：{{item.productName}}</view>
       <view>货品描述：<text>{{item.productDesc || '暂无描述'}}</text></view>
@@ -58,6 +59,8 @@
             <view class="sku-inline" wx:if="{{admin}}">商品进价：<text>￥</text>{{sku.skuInPrice}}</view>
             <view class="sku-inline">商品售价：<text>￥</text>{{sku.skuOutPrice}}</view>
           </view>
+          <view>进货数量：{{sku.purchaseNums}}</view>
+          <view>售货数量：{{sku.sellNums}}</view>
           <view class="sku-inline">商品库存：{{sku.skuStock}}</view>
           <view
             class="btn sell-btn"

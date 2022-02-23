@@ -51,9 +51,11 @@ Page({
   },
   /* LifeCycle--监听页面显示 */
   onShow: function () {
-    this.pageLoad({
-      load: {loading: false}
-    })
+    if (this.data.pageNum === 1) {
+      this.pageLoad({
+        load: {loading: false}
+      })
+    }
   },
   /* Pull-down Fresh */
   onPullDownRefresh: function() {

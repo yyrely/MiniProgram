@@ -51,12 +51,14 @@ Page({
   },
   /* LifeCycle--监听页面加载 */
   onShow: function () {
-    this.setData({
-      admin: globalData.admin
-    })
-    this.pageLoad({
-      load: {loading: false}
-    })
+    if (this.data.pageNum === 1) {
+      this.setData({
+        admin: globalData.admin
+      })
+      this.pageLoad({
+        load: {loading: false}
+      })
+    }
   },
   /* Pull-down Fresh */
   onPullDownRefresh: function() {

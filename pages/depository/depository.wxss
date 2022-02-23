@@ -46,6 +46,15 @@
   box-shadow: 0 1px 5px #ddd;
   overflow: hidden;
 }
+.goods-category {
+  display: inline-block;
+  padding: 1px 6px;
+  color: #fff;
+  border-radius: 4px;
+  background-color: #87daff;
+  position: absolute;
+  top: 10px;
+}
 .goods-num {
   font-size: 16px;
   color: #87daff;
