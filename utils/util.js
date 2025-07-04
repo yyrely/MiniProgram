@@ -21,7 +21,7 @@ const judgeDate = ({start, end}) => {
   return true
 };
 
-function handleDate ({...date}) {
+function handleDate ({...date} = {}) {
   if (!date.year) {
     var date = new Date()
     date = {

@@ -1,39 +1,190 @@
 .hide {
   display: none;
 }
-.datepicker {
+
+.datepicker-container {
   display: flex;
-  margin-bottom: 15px; }
-  .datepicker > text {
-    padding: 0 10px;
-    font-size: 22px;
-    font-weight: bold;
-    color: #9ae0ff;
-  }
-.date-start,
-.date-end {
-  flex: 1;
-  position: relative;
-  z-index: 15;
-}
-.date-btn {
-  display: block;
-  padding: 5px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  color: #fff;
-  border-radius: 5px;
-  background: #9ae0ff;
+  align-items: center;
+  gap: 15rpx;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(135, 218, 255, 0.1);
+  border: 1px solid #eee;
 }
 
-.calendar {
-  width: calc(100vw - 75rpx);
-  box-shadow: 1px 1px 5px #eee;
-  background: #fff;
-  position: absolute; }
-  .date-start .calendar {
-    left: 0; }
-  .date-end .calendar {
-    right: 0;
-  }
+.date-display {
+  flex: 1;
+  font-size: 26rpx;
+  color: #87daff;
+  font-weight: 600;
+  background: rgba(135, 218, 255, 0.1);
+  padding: 12rpx 16rpx;
+  border-radius: 8rpx;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(135, 218, 255, 0.2);
+}
+
+.date-display:hover {
+  background: rgba(135, 218, 255, 0.2);
+  border-color: #87daff;
+  transform: translateY(-1rpx);
+}
+
+.date-display:active {
+  transform: translateY(0);
+  background: rgba(135, 218, 255, 0.3);
+}
+
+.date-selector {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 16rpx;
+  background: #f8f9fa;
+  border: 1px solid #eee;
+  border-radius: 8rpx;
+  min-width: 120rpx;
+  justify-content: center;
+}
+
+.selector-text {
+  font-size: 24rpx;
+  color: #333;
+}
+
+.selector-arrow {
+  font-size: 18rpx;
+  color: #87daff;
+}
+
+/* 弹窗样式 */
+.custom-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.custom-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-box {
+  background: white;
+  border-radius: 16rpx;
+  margin: 30rpx;
+  width: 90%;
+  max-width: 480rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.3);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.custom-modal.show .modal-box {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.close-btn {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #999;
+  background: #f8f9fa;
+  border-radius: 50%;
+}
+
+.date-inputs {
+  padding: 24rpx;
+}
+
+.input-item {
+  margin-bottom: 24rpx;
+}
+
+.input-item:last-child {
+  margin-bottom: 0;
+}
+
+.input-label {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 12rpx;
+}
+
+.date-input {
+  padding: 16rpx;
+  background: #f8f9fa;
+  border: 1px solid #eee;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  color: #333;
+  text-align: center;
+}
+
+.date-input:active {
+  border-color: #87daff;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 16rpx;
+  padding: 24rpx;
+  border-top: 1px solid #f0f0f0;
+}
+
+.btn {
+  flex: 1;
+  padding: 16rpx;
+  border-radius: 8rpx;
+  text-align: center;
+  font-size: 26rpx;
+}
+
+.cancel-btn {
+  background: #f8f9fa;
+  color: #666;
+  border: 1px solid #eee;
+}
+
+.confirm-btn {
+  background: #87daff;
+  color: white;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+

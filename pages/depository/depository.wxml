@@ -1,133 +1,210 @@
-<!--pages/location/location.wxml-->
-<view class="main container">  
-  <view class="add-search {{admin ? 'admin' : ''}}">
-    <view
-      class="add"
-      wx:if="{{admin}}"
-    >
-      <navigator url="../modify/index">+</navigator>
-    </view>
-    <mp-searchbar
-      bind:confirm="bdSearchConfirm"
-      ext-class="search"
-      cancel="false"
-    ></mp-searchbar>
-  </view>
-  <mp-loading
-    show="{{loading}}"
-    type="dot-gray"
-    animated="true"
-    duration="{{900}}"
-  />
-  <view
-    wx:for="{{list}}"
-    wx:for-item="item"
-    wx:key="productId"
-    class="card-box {{showNum == item.productId ? 'show' : '' }}">
-    <view
-      bind:tap="toggleGoods"
-      data-id="{{item.productId}}"
-      class="goods-box">
-      <view class="goods-category">{{item.categoryName}}</view>
-      <view class="goods-num">货号：<text>{{item.productNo}}</text></view>
-      <view class="goods-name">货品名称：{{item.productName}}</view>
-      <view>货品描述：<text>{{item.productDesc || '暂无描述'}}</text></view>
-      <view class="goods-btn" wx:if="{{admin}}">
-        <navigator url="../modify/index?prodid={{item.productId}}">修改</navigator>
-      </view>
-    </view>
-    <view class="sku-list" wx:if="{{showNum === item.productId}}">
-      <mp-loading
-        type="dot-gray"
-        show="{{loadSku}}"
-        extClass="load-sku"
-        animated="true"
-        duration="{{900}}"
-      />
-      <view>
-        <view
-          wx:if="{{showNum === item.productId}}"
-          wx:for="{{skuList}}"
-          wx:for-item="sku"
-          wx:key="skuId"
-          bind:longpress="longPressSku"
-          class="sku-item">
-          <block wx:for="{{sku.valueList}}" wx:for-item="value" wx:key="valueId">
-            <text class="sku-inline sku-attribute">{{value.attributeName}}：{{value.valueName}}</text>
-          </block>
-          <view>
-            <view class="sku-inline" wx:if="{{admin}}">商品进价：<text>￥</text>{{sku.skuInPrice}}</view>
-            <view class="sku-inline">商品售价：<text>￥</text>{{sku.skuOutPrice}}</view>
-          </view>
-          <view>进货数量：{{sku.purchaseNums}}</view>
-          <view>售货数量：{{sku.sellNums}}</view>
-          <view class="sku-inline">商品库存：{{sku.skuStock}}</view>
-          <view
-            class="btn sell-btn"
-            data-skuid="{{sku.skuId}}"
-            bind:tap="bdSellTap"
-          >出售</view>
-          <view
-            class="btn back-btn"
-            data-skuid="{{sku.skuId}}"
-            data-prodid="{{item.productId}}"
-            bind:tap="bdBackTap"
-          >退货</view>
+<!--pages/depository/depository.wxml-->
+<view class="page-container {{loading ? 'loading' : ''}}">
+  <view class="main-content">
+    <view class="header-section">
+      <view class="page-title">仓库管理</view>
+      <view class="toolbar {{admin ? 'admin' : ''}}">
+        <view class="add-btn" wx:if="{{admin}}">
+          <navigator url="../modify/index">
+            <view class="add-icon">+</view>
+            <view class="add-text">添加商品</view>
+          </navigator>
+        </view>
+        <view class="search-container">
+          <mp-searchbar
+            bind:confirm="bdSearchConfirm"
+            ext-class="search-bar"
+            cancel="false"
+            placeholder="搜索商品..."
+          ></mp-searchbar>
         </view>
       </view>
     </view>
+    
+    <mp-loading
+      show="{{loading}}"
+      type="dot-gray"
+      animated="true"
+      duration="{{900}}"
+    />
+    
+    <view class="goods-list">
+      <block
+        wx:for="{{list}}"
+        wx:for-item="item"
+        wx:key="productId"
+      >
+        <view class="goods-card {{showNum == item.productId ? 'expanded' : ''}}">
+          <view class="goods-header">
+            <view class="edit-btn" wx:if="{{admin}}">
+              <navigator url="../modify/index?prodid={{item.productId}}">
+                编辑
+              </navigator>
+            </view>
+            <view
+              catch:tap="toggleGoods"
+              data-id="{{item.productId}}"
+              data-index="{{index}}"
+              class="goods-content"
+            >
+              <view class="category-badge">{{item.categoryName}}</view>
+              <view class="goods-info">
+                <view class="goods-name">{{item.productName}}</view>
+                <view class="goods-no">货号：{{item.productNo}}</view>
+                <view class="goods-desc">{{item.productDesc || '暂无描述'}}</view>
+              </view>
+              <view class="expand-icon {{showNum == item.productId ? 'rotated' : ''}}">
+                ▼
+              </view>
+            </view>
+          </view>
+          
+          <view class="sku-section {{showNum == item.productId ? 'show' : ''}}" wx:if="{{showNum == item.productId && (loadSku || skuList.length > 0)}}">
+            <view class="custom-loading" wx:if="{{loadSku}}">
+              <view class="loading-spinner"></view>
+              <view class="loading-dots">
+                <view class="loading-dot"></view>
+                <view class="loading-dot"></view>
+                <view class="loading-dot"></view>
+              </view>
+              <text class="loading-text">正在加载SKU信息...</text>
+            </view>
+            
+            <view class="sku-list" wx:if="{{skuList.length > 0}}">
+              <view class="sku-header">
+                <text class="sku-count">共 {{skuList.length}} 个规格</text>
+              </view>
+              
+              <view
+                wx:for="{{skuList}}"
+                wx:for-item="sku"
+                wx:key="skuId"
+                class="sku-item-simple"
+              >
+                <!-- SKU基本信息行 -->
+                <view class="sku-main-info">
+                  <view class="sku-attributes-compact">
+                    <view
+                      wx:for="{{sku.valueList}}"
+                      wx:for-item="value"
+                      wx:key="valueId"
+                      class="attribute-tag-small"
+                    >
+                      {{value.valueName}}
+                    </view>
+                  </view>
+                  <view class="sku-stock-info">
+                    <text class="stock-label">库存</text>
+                    <text class="stock-value">{{sku.skuStock}}</text>
+                  </view>
+                </view>
+                
+                <!-- SKU详细信息行 -->
+                <view class="sku-detail-info">
+                  <view class="price-info-compact">
+                    <text class="price-item-compact" wx:if="{{admin}}">进价 ¥{{sku.skuInPrice}}</text>
+                    <text class="price-item-compact">售价 ¥{{sku.skuOutPrice}}</text>
+                  </view>
+                  <view class="quantity-info-compact">
+                    <text class="qty-item">进货{{sku.purchaseNums}}</text>
+                    <text class="qty-item">售出{{sku.sellNums}}</text>
+                  </view>
+                  <view class="sku-actions-compact">
+                    <view
+                      class="action-btn-small sell-btn"
+                      data-skuid="{{sku.skuId}}"
+                      bind:tap="bdSellTap"
+                    >
+                      出售
+                    </view>
+                    <view
+                      class="action-btn-small return-btn"
+                      data-skuid="{{sku.skuId}}"
+                      data-prodid="{{item.productId}}"
+                      bind:tap="bdBackTap"
+                    >
+                      退货
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            
+            <view class="no-sku-message" wx:if="{{skuList.length == 0 && !loadSku}}">
+              暂无SKU数据
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    
+    <view class="load-more-section" wx:if="{{ pageNum < totalpages }}">
+      <mp-loading
+        type="dot-gray"
+        show="{{loadMore}}"
+        animated="true"
+        duration="{{900}}"
+      />
+    </view>
   </view>
+  
+  <!-- 出售对话框 -->
   <mp-dialog
     title="商品出售"
     show="{{showModal}}"
     bind:buttontap="tapDialogButton"
-    buttons="{{[{text: '取消'}, {text: '确认'}]}}">
-    <view class="input-row">
-      <label class="input-label">销售价格：</label>
-      <input
-        type="digit"
-        value="{{sale.price}}"
-        data-type="sale.price"
-        bind:input="bdInputChange"
-        placeholder="售价/元"
-        class="input-text"
-      />
-    </view>
-    <view class="input-row">
-      <label class="input-label">销售数量：</label>
-      <input
-        type="number"
-        value="{{sale.number}}"
-        data-type="sale.number"
-        bind:input="bdInputChange"
-        placeholder="数量/件"
-        class="input-text"
-      />
+    buttons="{{[{text: '取消'}, {text: '确认'}]}}"
+    ext-class="custom-dialog"
+  >
+    <view class="dialog-content">
+      <view class="input-group">
+        <view class="input-label">销售价格</view>
+        <input
+          type="digit"
+          value="{{sale.price}}"
+          data-type="sale.price"
+          bind:input="bdInputChange"
+          placeholder="请输入销售价格"
+          class="input-field"
+        />
+        <view class="input-unit">元</view>
+      </view>
+      <view class="input-group">
+        <view class="input-label">销售数量</view>
+        <input
+          type="number"
+          value="{{sale.number}}"
+          data-type="sale.number"
+          bind:input="bdInputChange"
+          placeholder="请输入销售数量"
+          class="input-field"
+        />
+        <view class="input-unit">件</view>
+      </view>
     </view>
   </mp-dialog>
+  
+  <!-- 退货对话框 -->
   <mp-dialog
     title="商品退回厂家"
     show="{{showBack}}"
     bind:buttontap="bdBackModBtn"
-    buttons="{{[{text: '取消'}, {text: '确认'}]}}">
-    <view class="input-row">
-      <label class="input-label">销售数量：</label>
-      <input
-        type="number"
-        value="{{back.sellNums}}"
-        data-type="back.sellNums"
-        bind:input="bdInputChange"
-        placeholder="数量/件"
-        class="input-text"
-      />
+    buttons="{{[{text: '取消'}, {text: '确认'}]}}"
+    ext-class="custom-dialog"
+  >
+    <view class="dialog-content">
+      <view class="input-group">
+        <view class="input-label">退货数量</view>
+        <input
+          type="number"
+          value="{{back.sellNums}}"
+          data-type="back.sellNums"
+          bind:input="bdInputChange"
+          placeholder="请输入退货数量"
+          class="input-field"
+        />
+        <view class="input-unit">件</view>
+      </view>
     </view>
   </mp-dialog>
-  <view wx:if="{{ pageNum < totalpages }}">
-    <mp-loading
-      type="dot-gray"
-      show="{{loadMore}}"
-      animated="true"
-      duration="{{900}}"
-    />
-  </view>
 </view>

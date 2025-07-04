@@ -142,7 +142,13 @@ Component({
                         displayStyle: 'none'
                     });
                 } else {
-                    this._startAnimation();
+                    if (this.data.animationInstance) {
+                        this._startAnimation();
+                    } else {
+                        this.setData({
+                            displayStyle: 'none'
+                        });
+                    }
                 }
             } else {
                 this.setData({
@@ -156,10 +162,16 @@ Component({
             setTimeout(function () {
                 var data = _this.data;
                 var animation = data.animationInstance;
-                animation.height(0).step();
-                _this.setData({
-                    animationData: animation.export()
-                });
+                if (animation && typeof animation.height === 'function') {
+                    animation.height(0).step();
+                    _this.setData({
+                        animationData: animation.export()
+                    });
+                } else {
+                    _this.setData({
+                        displayStyle: 'none'
+                    });
+                }
             }, 0);
         }
     },

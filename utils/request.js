@@ -1,5 +1,5 @@
 // const 
-const domain = 'https://product.chuncongcong.com',
+const domain = 'https://product.chuncongcong.top',
   URL = {
     login: domain +'/api/user/login', /* 用户登录 */
     salStatis: domain + '/api/sell/log/nums', /* 售货统计 */

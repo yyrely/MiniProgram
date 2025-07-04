@@ -5,8 +5,8 @@ let app = getApp()
 Page({
   /* Init data of page */
   data: {
-    username: null,
-    password: null
+    username: '',
+    password: ''
   },
   // Input value listener
   username: function (e) {

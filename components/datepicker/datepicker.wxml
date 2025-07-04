@@ -1,30 +1,53 @@
 <!--components/datepicker/datepicker.wxml-->
-<view class="datepicker">
-  <view class="date-start">
-    <view
-      class="date-btn"
-      data-type="start"
-      bind:tap="bdDateTap"
-    >{{start}}</view>
-    <calendar
-      class="calendar {{starthide && 'hide'}}"
-      calendarConfig="{{calendarConfig}}"
-      data-type="start"
-      bind:dayPick="bdDayPick"
-    ></calendar>
-  </view>
-  <text>—</text>
-  <view class="date-end">
-    <view
-      class="date-btn"
-      data-type="end"
-      bind:tap="bdDateTap"
-    >{{end}}</view>
-    <calendar
-      class="calendar {{endhide && 'hide'}}"
-      calendarConfig="{{calendarConfig}}"
-      data-type="end"
-      bind:dayPick="bdDayPick"
-    ></calendar>
+<view class="datepicker-container">
+  <picker mode="selector" 
+          range="{{quickOptions}}" 
+          value="{{selectedQuickIndex}}"
+          bind:change="onQuickChange">
+    <view class="date-selector">
+      <text class="selector-text">{{quickOptions[selectedQuickIndex]}}</text>
+      <text class="selector-arrow">▼</text>
+    </view>
+  </picker>
+  
+  <view class="date-display" bind:tap="showCustomPicker">{{start}}{{start !== end ? ' 至 ' + end : ''}}</view>
+  
+  <!-- 自定义日期选择弹窗 -->
+  <view class="custom-modal {{showCustomModal ? 'show' : ''}}" bind:tap="hideCustomPicker">
+    <view class="modal-box" catch:tap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">选择日期范围</text>
+        <view class="close-btn" bind:tap="hideCustomPicker">×</view>
+      </view>
+      
+      <view class="date-inputs">
+        <view class="input-item">
+          <text class="input-label">开始日期</text>
+          <picker mode="date" 
+                  value="{{tempStart}}" 
+                  start="2020-01-01" 
+                  end="{{todayDate}}"
+                  bind:change="onTempStartChange">
+            <view class="date-input">{{tempStart}}</view>
+          </picker>
+        </view>
+        
+        <view class="input-item">
+          <text class="input-label">结束日期</text>
+          <picker mode="date" 
+                  value="{{tempEnd}}" 
+                  start="{{tempStart}}" 
+                  end="{{todayDate}}"
+                  bind:change="onTempEndChange">
+            <view class="date-input">{{tempEnd}}</view>
+          </picker>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <view class="btn cancel-btn" bind:tap="hideCustomPicker">取消</view>
+        <view class="btn confirm-btn" bind:tap="confirmCustomDate">确定</view>
+      </view>
+    </view>
   </view>
 </view>

@@ -1,28 +1,42 @@
 <!--pages/login/login.wxml-->
-<view class="main container">
-  <view class="login-box">
-    <view class="logo">
-      <image src="/images/shop.png" />
+<view class="login-container">
+  <view class="login-card">
+    <view class="logo-section">
+      <view class="logo">
+        <image src="/images/shop.png" mode="aspectFit" />
+      </view>
+      <text class="app-title">库存管理系统</text>
     </view>
-    <view class="flex-row">
-      <label class="input-label">用户名：</label>
-      <input
-        class="input-text"
-        placeholder="用户名"
-        bind:input="username"
-      />
-    </view>
-    <view class="flex-row">
-      <label class="input-label">密码：</label>
-      <input
-        class="input-text"
-        placeholder="密码"
-        password="true"
-        bind:input="password"
-      />
-    </view>
-    <view>
-      <button bind:tap="login">登录</button>
+    
+    <view class="form-section">
+      <view class="input-group">
+        <view class="input-wrapper">
+          <text class="input-icon">👤</text>
+          <input
+            class="input-field"
+            placeholder="请输入用户名"
+            bind:input="username"
+            value="{{username}}"
+          />
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <view class="input-wrapper">
+          <text class="input-icon">🔒</text>
+          <input
+            class="input-field"
+            placeholder="请输入密码"
+            password="true"
+            bind:input="password"
+            value="{{password}}"
+          />
+        </view>
+      </view>
+      
+      <view class="button-section">
+        <button class="login-btn" bind:tap="login">登录</button>
+      </view>
     </view>
   </view>
 </view>

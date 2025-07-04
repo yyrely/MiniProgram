@@ -1,31 +1,71 @@
-<view class="main container">
-  <datepicker bind:datefresh="dateFresh" />
-  <mp-loading
-    show="{{loading}}"
-    type="dot-gray"
-    animated="true"
-    duration="{{900}}"
-  />
-  <view
-    wx:for="{{backList}}"
-    wx:for-item="info"
-    wx:key="returnId"
-    class="card-box back-box"
-  >
-    <view>商品名称：{{info.productName}}</view>
-    <view>商品编号：{{info.productNo}}</view>
-    <view>退货数量：{{info.returnNums}}</view>
-    <view>金额总计：￥{{info.totalPrice}}</view>
-    <view>退货时间：￥{{info.returnDate}}</view>
-    <view>
-      规格属性：
-      <block
-        wx:for="{{info.valueList}}"
-        wx:for-item="attr"
-        wx:key="valueId"
+<view class="page-container">
+  <view class="main-content">
+    <view class="header-section">
+      <datepicker bind:datefresh="dateFresh" />
+    </view>
+    
+    <mp-loading
+      show="{{loading}}"
+      type="dot-gray"
+      animated="true"
+      duration="{{900}}"
+    />
+    
+    <view class="back-list">
+      <view
+        wx:for="{{backList}}"
+        wx:for-item="info"
+        wx:key="returnId"
+        class="back-card"
       >
-        <text class="product-attr">{{attr.valueName}}</text>
-      </block>
+        <view class="card-header">
+          <view class="product-name">{{info.productName}}</view>
+          <view class="product-no">{{info.productNo}}</view>
+        </view>
+        
+        <view class="card-body">
+          <view class="info-row">
+            <view class="info-item">
+              <view class="info-label">退货数量</view>
+              <view class="info-value quantity">{{info.returnNums}}件</view>
+            </view>
+            <view class="info-item">
+              <view class="info-label">金额总计</view>
+              <view class="info-value price">¥{{info.totalPrice}}</view>
+            </view>
+          </view>
+          
+          <view class="info-row">
+            <view class="info-item full-width">
+              <view class="info-label">退货时间</view>
+              <view class="info-value">{{info.returnDate}}</view>
+            </view>
+          </view>
+          
+          <view class="attributes-section" wx:if="{{info.valueList && info.valueList.length > 0}}">
+            <view class="info-label">规格属性</view>
+            <view class="attributes-list">
+              <view
+                wx:for="{{info.valueList}}"
+                wx:for-item="attr"
+                wx:key="valueId"
+                class="attribute-tag"
+              >
+                {{attr.valueName}}
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="load-more-section" wx:if="{{ pageNum < totalpages }}">
+      <mp-loading
+        type="dot-gray"
+        show="{{loadMore}}"
+        animated="true"
+        duration="{{900}}"
+      />
     </view>
   </view>
 </view>

@@ -1,66 +1,101 @@
 <!--pages/sale/sale.wxml-->
-<!--index.wxml-->
-<view class="main container">
-  <datepicker bind:datefresh="dateFresh" />
-  <mp-loading
-    show="{{loading}}"
-    type="dot-gray"
-    animated="true"
-    duration="{{900}}"
-  />
-  <view
-    wx:for="{{saleList}}"
-    wx:for-item="info"
-    wx:key="sellId"
-    data-sale="{{info.sellId}}"
-    bind:tap="bdSaleTap"
-    class="card-box sale-box"
-  >
-    <view>商品名称：{{info.productName}}</view>
-    <view>商品编号：{{info.productNo}}</view>
-    <view>销售数量：{{info.sellNums}}</view>
-    <view>销售价格：{{info.sellPrice}}</view>
-    <view>金额总计：{{info.sellTotal}}</view>
-    <view>
-      规格属性：
-      <block
-        wx:for="{{info.valueList}}"
-        wx:for-item="attr"
-        wx:key="valueId"
-      >
-        <text class="product-attr">{{attr.valueName}}</text>
-      </block>
+<view class="page-container">
+  <view class="main-content">
+    <view class="header-section">
+      <datepicker bind:datefresh="dateFresh" />
     </view>
-    <view
-      class="btn"
-      wx:if="{{info.sellId == rejectId}}"
-      data-num="{{info.sellNums}}"
-      bind:tap="bdRejectTap"
-    >退货</view>
-  </view>
-  <view wx:if="{{ pageNum < totalpages }}">
+    
     <mp-loading
+      show="{{loading}}"
       type="dot-gray"
-      show="{{loadMore}}"
       animated="true"
       duration="{{900}}"
     />
+    
+    <view class="sale-list">
+      <view
+        wx:for="{{saleList}}"
+        wx:for-item="info"
+        wx:key="sellId"
+        data-sale="{{info.sellId}}"
+        bind:tap="bdSaleTap"
+        class="sale-card"
+      >
+        <view class="card-header">
+          <view class="product-name">{{info.productName}}</view>
+          <view class="product-no">{{info.productNo}}</view>
+          <view class="return-btn" wx:if="{{info.sellId == rejectId}}" 
+                data-num="{{info.sellNums}}" 
+                bind:tap="bdRejectTap">
+            退货
+          </view>
+        </view>
+        
+        <view class="card-body">
+          <view class="info-row">
+            <view class="info-item">
+              <view class="info-label">销售数量</view>
+              <view class="info-value quantity">{{info.sellNums}}件</view>
+            </view>
+            <view class="info-item">
+              <view class="info-label">销售价格</view>
+              <view class="info-value price">¥{{info.sellPrice}}</view>
+            </view>
+          </view>
+          
+          <view class="info-row">
+            <view class="info-item full-width">
+              <view class="info-label">金额总计</view>
+              <view class="info-value total-price">¥{{info.sellTotal}}</view>
+            </view>
+          </view>
+          
+          <view class="attributes-section" wx:if="{{info.valueList && info.valueList.length > 0}}">
+            <view class="info-label">规格属性</view>
+            <view class="attributes-list">
+              <view
+                wx:for="{{info.valueList}}"
+                wx:for-item="attr"
+                wx:key="valueId"
+                class="attribute-tag"
+              >
+                {{attr.valueName}}
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="load-more-section" wx:if="{{ pageNum < totalpages }}">
+      <mp-loading
+        type="dot-gray"
+        show="{{loadMore}}"
+        animated="true"
+        duration="{{900}}"
+      />
+    </view>
   </view>
+  
   <mp-dialog
     title="客户退货"
     show="{{showBack}}"
     bind:buttontap="bdBackModBtn"
-    buttons="{{[{text: '取消'}, {text: '确认'}]}}">
-    <view class="input-row">
-      <label class="input-label">退货数量：</label>
-      <input
-        type="number"
-        value="{{backNums}}"
-        data-type="back.sellNums"
-        bind:input="bdInputChange"
-        placeholder="数量/件"
-        class="input-text"
-      />
+    buttons="{{[{text: '取消'}, {text: '确认'}]}}"
+    ext-class="custom-dialog">
+    <view class="dialog-content">
+      <view class="input-group">
+        <view class="input-label">退货数量</view>
+        <input
+          type="number"
+          value="{{backNums}}"
+          data-type="back.sellNums"
+          bind:input="bdInputChange"
+          placeholder="请输入退货数量"
+          class="input-field"
+        />
+        <view class="input-unit">件</view>
+      </view>
     </view>
   </mp-dialog>
 </view>

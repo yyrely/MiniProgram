@@ -1,42 +1,84 @@
 <!--index.wxml-->
-<view class="main container">
-  <datepicker bind:datefresh="dateFresh" />
-  <view class="card-box product-info">
-    <view class="product-left ">
-      <image class="block-icon" src="/images/sale.svg" />
-    </view>
-    <view class="product-right">
-      <view>销售金额：{{saleInfo.totalPrices || '0'}}</view>
-      <view>销售件数：{{saleInfo.totalNums || '0'}}</view>
-      <view>订单笔数：{{saleInfo.counts || '0'}}</view>
-    </view>
+<view class="index-container">
+  <view class="header-section">
+    <datepicker bind:datefresh="dateFresh" />
   </view>
-  <view class="card-box product-info">
-    <view class="product-left">
-      <image class="block-icon" src="/images/purchase.svg" />
+  
+  <view class="dashboard-grid">
+    <view class="stat-card sale-card">
+      <view class="card-icon">
+        <image class="icon-image" src="/images/sale.svg" />
+      </view>
+      <view class="card-content">
+        <view class="card-title">销售统计</view>
+        <view class="stat-item">
+          <text class="stat-label">销售金额</text>
+          <text class="stat-value">{{saleInfo.totalPrices || '0'}}</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-label">销售件数</text>
+          <text class="stat-value">{{saleInfo.totalNums || '0'}}</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-label">订单笔数</text>
+          <text class="stat-value">{{saleInfo.counts || '0'}}</text>
+        </view>
+      </view>
     </view>
-    <view class="product-right">
-      <view>进货金额：{{purcInfo.totalPrices || '0'}}</view>
-      <view>进货件数：{{purcInfo.totalNums || '0'}}</view>
-      <view>订单笔数：{{purcInfo.counts || '0'}}</view>
+    
+    <view class="stat-card purchase-card">
+      <view class="card-icon">
+        <image class="icon-image" src="/images/purchase.svg" />
+      </view>
+      <view class="card-content">
+        <view class="card-title">进货统计</view>
+        <view class="stat-item">
+          <text class="stat-label">进货金额</text>
+          <text class="stat-value">{{purcInfo.totalPrices || '0'}}</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-label">进货件数</text>
+          <text class="stat-value">{{purcInfo.totalNums || '0'}}</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-label">订单笔数</text>
+          <text class="stat-value">{{purcInfo.counts || '0'}}</text>
+        </view>
+      </view>
     </view>
-  </view>
-  <view class="card-box product-info">
-    <view class="product-left">
-      <image class="block-icon" src="/images/stoke.svg" />
+    
+    <view class="stat-card stock-card">
+      <view class="card-icon">
+        <image class="icon-image" src="/images/stoke.svg" />
+      </view>
+      <view class="card-content">
+        <view class="card-title">库存统计</view>
+        <view class="stat-item">
+          <text class="stat-label">库存总额</text>
+          <text class="stat-value">{{stokeInfo.totalPrices || '0'}}</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-label">库存总量</text>
+          <text class="stat-value">{{stokeInfo.totalNums || '0'}}</text>
+        </view>
+      </view>
     </view>
-    <view class="product-right">
-      <text>库存总额：{{stokeInfo.totalPrices || '0'}}</text>
-      <text>库存总量：{{stokeInfo.totalNums || '0'}}</text>
-    </view>
-  </view>
-  <view class="card-box product-info">
-    <view class="product-left">
-      <image class="block-icon" src="/images/back.svg" />
-    </view>
-    <view class="product-right">
-      <text>退货总额：{{backInfo.totalPrices || '0'}}</text>
-      <text>退货总量：{{backInfo.totalNums || '0'}}</text>
+    
+    <view class="stat-card return-card">
+      <view class="card-icon">
+        <image class="icon-image" src="/images/back.svg" />
+      </view>
+      <view class="card-content">
+        <view class="card-title">退货统计</view>
+        <view class="stat-item">
+          <text class="stat-label">退货总额</text>
+          <text class="stat-value">{{backInfo.totalPrices || '0'}}</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-label">退货总量</text>
+          <text class="stat-value">{{backInfo.totalNums || '0'}}</text>
+        </view>
+      </view>
     </view>
   </view>
 </view>
